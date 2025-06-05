@@ -6,8 +6,9 @@ import ClickSpark from "@/components/ClickSpark";
 // It has been temporarily disabled to remove the cursor trail.
 // import SplashCursor from "@/components/SplashCursor";
 import { Button } from "@/components/ui/button";
-import { Star } from "lucide-react";
 import {
+  Star,
+  Play,
   Vote,
   Megaphone,
   MessageCircle,
@@ -44,20 +45,17 @@ const Index = () => {
       <section className="py-8 bg-white border-b border-gray-100">
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <p className="font-inter text-gray-600 mb-4">
-              Trusted by 300+ buildings across Croatia, Slovenia, and Bosnia & Herzegovina
-            </p>
-            <div className="flex justify-center items-center mb-6">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className="w-5 h-5 text-yellow-400 fill-current"
-                />
-              ))}
-              <span className="ml-2 font-inter text-gray-600">
-                4.8/5 from 1,200+ residents
+            <a
+              href="https://www.youtube.com/shorts/82Nsgn200iM"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-3 text-conexa-primary hover:text-blue-700 transition-colors"
+            >
+              <Play className="w-8 h-8" />
+              <span className="font-poppins font-semibold text-xl md:text-2xl">
+                pogledajte kratki video o aplikaciji i njezinim mogućnostima
               </span>
-            </div>
+            </a>
           </div>
         </div>
       </section>
