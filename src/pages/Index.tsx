@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import HeroCarousel from "@/components/HeroCarousel";
-import SplashCursor from "@/components/SplashCursor";
+// SplashCursor adds a trailing cursor effect to the homepage.
+// It has been temporarily disabled to remove the cursor trail.
+// import SplashCursor from "@/components/SplashCursor";
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 import {
@@ -22,7 +24,7 @@ import {
 const Index = () => {
   return (
     <Layout>
-      <SplashCursor />
+      {/* <SplashCursor />  // Removed cursor trail for now */}
       {/* Hero Section with Carousel */}
       <section className="py-24 bg-gradient-to-br from-conexa-light-grey via-white to-blue-50">
         <div className="container mx-auto px-4">
