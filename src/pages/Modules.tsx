@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import { Card, CardContent } from '@/components/ui/card';
@@ -141,10 +141,14 @@ const Modules = () => {
     ]
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-conexa-light-grey to-white py-20">
+      <section className="bg-gradient-to-br from-conexa-light-grey to-white pt-20 pb-8">
         <div className="container mx-auto px-4 text-center">
           <h1 className="font-poppins font-semibold text-4xl lg:text-5xl text-gray-900 mb-6">
             Choose Your Modules
@@ -156,7 +160,7 @@ const Modules = () => {
       </section>
 
       {/* Modules Tabs */}
-      <section className="py-20 bg-white">
+      <section className="pt-12 pb-20 bg-white">
         <div className="container mx-auto px-4">
           <Tabs defaultValue="building" className="max-w-7xl mx-auto">
             <TabsList className="grid w-full grid-cols-3 mb-16 bg-gray-50 p-2 rounded-2xl shadow-sm border border-gray-200 h-16">
