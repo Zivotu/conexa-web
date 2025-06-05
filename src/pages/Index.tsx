@@ -34,14 +34,14 @@ const Index = () => {
       <Layout>
       {/* <SplashCursor />  // Removed cursor trail for now */}
       {/* Hero Section with Carousel */}
-      <section className="py-24 bg-gradient-to-br from-conexa-light-grey via-white to-blue-50">
+      <section className="py-16 bg-gradient-to-br from-conexa-light-grey via-white to-blue-50">
         <div className="container mx-auto px-4">
           <HeroCarousel />
         </div>
       </section>
 
       {/* Social Proof Banner */}
-      <section className="py-12 bg-white border-b border-gray-100">
+      <section className="py-8 bg-white border-b border-gray-100">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <p className="font-inter text-gray-600 mb-4">
@@ -63,7 +63,7 @@ const Index = () => {
       </section>
 
       {/* Results Section */}
-      <section className="py-16 bg-gradient-to-r from-conexa-primary to-blue-600">
+      <section className="py-12 bg-gradient-to-r from-conexa-primary to-blue-600">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
             <h2 className="font-poppins font-semibold text-3xl text-white mb-4">
@@ -100,7 +100,7 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
@@ -209,7 +209,7 @@ const Index = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-gradient-to-br from-conexa-light-grey to-blue-50">
+      <section className="py-16 bg-gradient-to-br from-conexa-light-grey to-blue-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="font-poppins font-semibold text-4xl text-gray-900 text-center mb-16">
@@ -275,7 +275,7 @@ const Index = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-white">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="font-poppins font-semibold text-4xl text-gray-900 text-center mb-16">
@@ -346,7 +346,7 @@ const Index = () => {
       </section>
 
       {/* Pricing and CTA */}
-      <section className="py-16 bg-gradient-to-br from-conexa-primary to-blue-600">
+      <section className="py-12 bg-gradient-to-br from-conexa-primary to-blue-600">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="font-poppins font-semibold text-4xl text-white mb-6">
