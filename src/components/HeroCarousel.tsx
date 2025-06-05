@@ -16,16 +16,16 @@ const HeroCarousel = () => {
     {
       title: "Your building, your neighbourhood, one smart mobile app.",
       subtitle: "Everything that matters, right where you live.",
-      image: "/assets/Slide1.jpg",
+      image: "/assets/Slide3.jpg",
       alt: "Happy community using mobile technology",
-      overlayText: "Live chat, bottom right!24/7",
+      overlayText: "Need it? Use it. More coming.",
     },
     {
       title: "Connect with your neighbors instantly.",
       subtitle: "Join thousands of residents who use Conexa to stay informed and engaged with their community.",
-      image: "/assets/Slide2.jpg",
+      image: "/assets/Slide2.png",
       alt: "People connecting and communicating",
-      overlayText: "Community matters",
+      overlayText: "Smart building.",
     },
     {
       title: "Need help? We're here for you!",
