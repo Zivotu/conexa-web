@@ -53,7 +53,7 @@ const Index = () => {
             >
               <Play className="w-8 h-8" />
               <span className="font-poppins font-semibold text-xl md:text-2xl">
-                pogledajte kratki video o aplikaciji i njezinim mogućnostima
+                Watch a short video about the app and its features.
               </span>
             </a>
           </div>
