@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import HeroCarousel from "@/components/HeroCarousel";
+import ClickSpark from "@/components/ClickSpark";
 // SplashCursor adds a trailing cursor effect to the homepage.
 // It has been temporarily disabled to remove the cursor trail.
 // import SplashCursor from "@/components/SplashCursor";
@@ -23,7 +24,14 @@ import {
 
 const Index = () => {
   return (
-    <Layout>
+    <ClickSpark
+      sparkColor="#333"
+      sparkSize={10}
+      sparkRadius={15}
+      sparkCount={8}
+      duration={400}
+    >
+      <Layout>
       {/* <SplashCursor />  // Removed cursor trail for now */}
       {/* Hero Section with Carousel */}
       <section className="py-24 bg-gradient-to-br from-conexa-light-grey via-white to-blue-50">
@@ -366,6 +374,7 @@ const Index = () => {
         </div>
       </section>
     </Layout>
+    </ClickSpark>
   );
 };
 
