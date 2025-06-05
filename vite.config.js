@@ -1,6 +1,9 @@
+/* eslint-env node */
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
