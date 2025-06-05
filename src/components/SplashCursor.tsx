@@ -88,6 +88,9 @@ const SplashCursor = ({
     };
 
     let pointers = [new (pointerPrototype as any)()];
+    const baseDissipation = config.DENSITY_DISSIPATION;
+    const fastDissipation = baseDissipation * 2;
+    let lastPointerTime = Date.now();
 
     const { gl, ext } = getWebGLContext(canvas);
     if (!ext.supportLinearFiltering) {
@@ -189,6 +192,9 @@ const SplashCursor = ({
     function updateFrame() {
       const dt = calcDeltaTime();
       if (resizeCanvas()) initFramebuffers();
+      if (Date.now() - lastPointerTime > 100) {
+        config.DENSITY_DISSIPATION = fastDissipation;
+      }
       updateColors(dt);
       applyInputs();
       step(dt);
@@ -381,6 +387,13 @@ const SplashCursor = ({
       pointer.deltaY = correctDeltaY(pointer.texcoordY - pointer.prevTexcoordY);
       pointer.moved = Math.abs(pointer.deltaX) > 0 || Math.abs(pointer.deltaY) > 0;
       pointer.color = color;
+      const speed = Math.hypot(pointer.deltaX, pointer.deltaY);
+      lastPointerTime = Date.now();
+      if (speed < 0.002) {
+        config.DENSITY_DISSIPATION = fastDissipation;
+      } else {
+        config.DENSITY_DISSIPATION = baseDissipation;
+      }
     }
 
     function updatePointerUpData(pointer: any) {
