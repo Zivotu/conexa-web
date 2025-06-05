@@ -39,8 +39,7 @@ index 032c7070fa65599bf9eed1771686265363c7db83..fda990932048908b16a1e2c18ad63a75
      {
        title: "Need help? We're here for you!",
 -      subtitle: "In the right bottom corner you can ask us live whatever you want to know more about Conexa, because we have a live chat!",
--      image: "/assets/Slide1.jpg?v=1"
-
+-      image: "/assets/Slide1.jpg",
 +      subtitle:
 +        "In the right bottom corner you can ask us live whatever you want to know more about Conexa, because we have a live chat!",
 +      image: "/assets/Slide1.jpg",
