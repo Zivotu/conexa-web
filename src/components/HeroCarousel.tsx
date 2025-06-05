@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
 import { ArrowRight } from 'lucide-react';
 
 const HeroCarousel = () => {
@@ -10,27 +16,30 @@ const HeroCarousel = () => {
     {
       title: "Your building, your neighbourhood, one smart mobile app.",
       subtitle: "Everything that matters, right where you live.",
-      image: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=800&h=600&fit=crop&crop=entropy&auto=format&q=80",
-      alt: "Happy community using mobile technology"
+      image: "/assets/Slide1.jpg",
+      alt: "Happy community using mobile technology",
+      overlayText: "Live chat, bottom right!24/7",
     },
     {
       title: "Connect with your neighbors instantly.",
       subtitle: "Join thousands of residents who use Conexa to stay informed and engaged with their community.",
-      image: "https://images.unsplash.com/photo-1556484687-30636164638b?w=800&h=600&fit=crop&crop=entropy&auto=format&q=80",
-      alt: "People connecting and communicating"
+      image: "/assets/Slide2.jpg",
+      alt: "People connecting and communicating",
+      overlayText: "Community matters",
     },
     {
       title: "Need help? We're here for you!",
       subtitle: "In the right bottom corner you can ask us live whatever you want to know more about Conexa, because we have a live chat!",
-      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop&crop=entropy&auto=format&q=80",
-      alt: "Happy people in a community setting"
+      image: "/assets/Slide1.jpg",
+      alt: "Happy people in a community setting",
+      overlayText: "Live chat 24/7",
     }
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 10000); // 10 seconds
+    }, 10000);
     return () => clearInterval(interval);
   }, [slides.length]);
 
@@ -43,10 +52,11 @@ const HeroCarousel = () => {
               <div className="animate-fade-in">
                 <h1 className="font-poppins font-semibold text-4xl lg:text-5xl text-gray-900 mb-6 leading-tight">
                   {slide.title.includes('mobile app') ? (
-                    slide.title.split('mobile app').map((part, i) => 
+                    slide.title.split('mobile app').map((part, i) =>
                       i === 0 ? (
                         <span key={i}>
-                          {part}<span className="text-conexa-primary">mobile app</span>
+                          {part}
+                          <span className="text-conexa-primary">mobile app</span>
                         </span>
                       ) : part
                     )
@@ -54,9 +64,7 @@ const HeroCarousel = () => {
                     slide.title
                   )}
                 </h1>
-                <p className="font-inter text-xl text-gray-600 mb-8">
-                  {slide.subtitle}
-                </p>
+                <p className="font-inter text-xl text-gray-600 mb-8">{slide.subtitle}</p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button className="bg-conexa-primary hover:bg-blue-700 text-lg px-8 py-6 transition-all hover:scale-105">
                     Get Conexa
@@ -64,23 +72,29 @@ const HeroCarousel = () => {
                   </Button>
                 </div>
               </div>
-              <div className="relative">
-                <div className="aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
-                  <img 
-                    src={slide.image}
-                    alt={slide.alt}
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                  />
-                </div>
+
+              <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
+                <img
+                  src={slide.image}
+                  alt={slide.alt}
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                />
+                {slide.overlayText && (
+                  <div className="absolute inset-0 flex items-center justify-center px-4">
+                    <span className="text-white text-3xl sm:text-4xl lg:text-6xl font-extrabold text-center bg-black/40 px-6 py-4 rounded-xl drop-shadow-lg">
+                      {slide.overlayText}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
+
       <CarouselPrevious className="left-4" />
       <CarouselNext className="right-4" />
-      
-      {/* Slide indicators */}
+
       <div className="flex justify-center mt-8 space-x-2">
         {slides.map((_, index) => (
           <button
