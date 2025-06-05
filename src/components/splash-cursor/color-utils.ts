@@ -46,12 +46,9 @@ export function HSVtoRGB(h: number, s: number, v: number) {
 }
 
 export function generateColor() {
-  const base = { r: 1, g: 0.9, b: 0.8 };
-  const intensity = 0.55;
-  return {
-    r: base.r * intensity,
-    g: base.g * intensity,
-    b: base.b * intensity,
-  };
+  let c = HSVtoRGB(Math.random(), 1.0, 1.0);
+  c.r *= 0.15;
+  c.g *= 0.15;
+  c.b *= 0.15;
+  return c;
 }
-
