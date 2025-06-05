@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
+import type { CarouselApi } from '@/components/ui/carousel';
 import {
   Carousel,
   CarouselContent,
@@ -11,6 +12,7 @@ import { ArrowRight } from 'lucide-react';
 
 const HeroCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [api, setApi] = useState<CarouselApi>();
 
   const slides = [
     {
@@ -39,12 +41,26 @@ const HeroCarousel = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 10000);
+    }, 5000);
     return () => clearInterval(interval);
   }, [slides.length]);
 
+  useEffect(() => {
+    if (!api) return;
+    api.scrollTo(currentSlide);
+  }, [api, currentSlide]);
+
+  useEffect(() => {
+    if (!api) return;
+    const onSelect = () => setCurrentSlide(api.selectedScrollSnap());
+    api.on('select', onSelect);
+    return () => {
+      api.off('select', onSelect);
+    };
+  }, [api]);
+
   return (
-    <Carousel className="w-full" opts={{ loop: true }}>
+    <Carousel className="w-full" opts={{ loop: true }} setApi={setApi}>
       <CarouselContent>
         {slides.map((slide, index) => (
           <CarouselItem key={index}>
