@@ -8,7 +8,12 @@ interface YouTubeEmbedProps {
   className?: string;
 }
 
-const YouTubeEmbed = ({ videoId, title = "YouTube video", caption, className = "" }: YouTubeEmbedProps) => {
+const YouTubeEmbed = ({
+  videoId,
+  title = "YouTube video",
+  caption,
+  className = ""
+}: YouTubeEmbedProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const handleLoad = () => {
@@ -20,7 +25,7 @@ const YouTubeEmbed = ({ videoId, title = "YouTube video", caption, className = "
       <div className="relative w-full rounded-lg overflow-hidden shadow-lg bg-white">
         <div className="relative pb-[56.25%] h-0">
           {!isLoaded ? (
-            <div 
+            <div
               className="absolute top-0 left-0 w-full h-full cursor-pointer bg-gray-900 flex items-center justify-center"
               onClick={handleLoad}
             >
