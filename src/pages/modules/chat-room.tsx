@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -30,7 +30,7 @@ import {
 } from '@/components/ui/accordion';
 
 const ModuleDetail = () => {
-  const { id } = useParams();
+  const id = 'chat-room';
 
   // Module data - in a real app this would come from an API
   const moduleData: { [key: string]: any } = {
@@ -319,7 +319,7 @@ const ModuleDetail = () => {
     },
   };
 
-  const module = moduleData[id || ''] || {
+  const module = moduleData[id] || {
     title: 'Module Not Found',
     category: 'Unknown',
     description: 'This module is not available or the link is incorrect.',
