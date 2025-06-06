@@ -6,20 +6,8 @@ import {
   ArrowLeft,
   Check,
   Star,
-  Play,
-  MessageCircle,
   Bell,
-  Camera,
-  Reply,
-  Heart,
-  Share,
-  Eye,
-  Shield,
-  Users,
-  Smartphone,
-  Clock,
-  Zap,
-  Building
+  Clock
 } from 'lucide-react';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
 import {
