@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Layout from '@/components/Layout';
+import ModuleNav from '@/components/ModuleNav';
 import { Card, CardContent } from '@/components/ui/card';
 import {
   ArrowLeft,
@@ -136,6 +137,7 @@ const BulletinBoardDetail = () => {
 
   return (
     <Layout>
+      <ModuleNav currentId="bulletin-board" />
       {/* Breadcrumb */}
       <section className="bg-conexa-light-grey py-3">
         <div className="container mx-auto px-4">

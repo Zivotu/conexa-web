@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import Layout from '@/components/Layout';
+import ModuleNav from '@/components/ModuleNav';
+import { modulesList } from '@/lib/modules';
 import { Card, CardContent } from '@/components/ui/card';
 import {
   ArrowLeft,
@@ -10,8 +12,6 @@ import {
   Users,
   Eye,
   Lock,
-  ChevronLeft,
-  ChevronRight,
 } from 'lucide-react';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
 import {
@@ -21,30 +21,6 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 
-interface ModuleInfo {
-  id: string;
-  title: string;
-  path: string;
-  color: string;
-}
-
-const modulesList: ModuleInfo[] = [
-  { id: 'alarm', title: 'Alarm', path: '/modules/alarm', color: '#fbc02d' },
-  { id: 'bulletin-board', title: 'Bulletin Board', path: '/modules/bulletin-board', color: '#fdc107' },
-  { id: 'chat-room', title: 'Chat Room', path: '/modules/chat-room', color: '#4baf4f' },
-  { id: 'documents', title: 'Documents', path: '/modules/documents', color: '#fe9100' },
-  { id: 'home-repairs', title: 'Home Repairs', path: '/modules/home-repairs', color: '#f3372b' },
-  { id: 'local-posts', title: 'Local Posts', path: '/modules/local-posts', color: '#9c27b0' },
-  { id: 'marketplace', title: 'Marketplace', path: '/modules/marketplace', color: '#4caf50' },
-  { id: 'noise-alerts', title: 'Noise Alerts', path: '/modules/noise-alerts', color: '#e91e63' },
-  { id: 'official-notices', title: 'Official Notices', path: '/modules/official-notices', color: '#3f51b5' },
-  { id: 'parking-sharing', title: 'Parking Sharing', path: '/modules/parking-sharing', color: '#795548' },
-  { id: 'quiz', title: 'Quiz', path: '/modules/quiz', color: '#009688' },
-  { id: 'security', title: 'Security', path: '/modules/security', color: '#607d8b' },
-  { id: 'shared-rides', title: 'Ride Sharing', path: '/modules/shared-rides', color: '#86be41' },
-  { id: 'shared-tasks', title: 'Shared Tasks', path: '/modules/shared-tasks', color: '#8bc34a' },
-  { id: 'wise-owl', title: 'Wise Owl', path: '/modules/wise-owl', color: '#ffc107' },
-];
 
 const ChatRoomDetail: React.FC = () => {
   const id = 'chat-room';
@@ -153,34 +129,7 @@ const ChatRoomDetail: React.FC = () => {
         </div>
       </section>
 
-      {/* Sticky Navigation Arrows */}
-      <div className="sticky top-[56px] bg-white py-4 z-20 shadow-sm">
-        <div className="container mx-auto px-4 flex justify-between items-center">
-          {prevModule ? (
-            <Link
-              to={prevModule.path}
-              className={`flex items-center space-x-2 bg-white border-2 border-[${prevModule.color}] text-[${prevModule.color}] p-3 rounded-full shadow-md hover:shadow-lg`}
-            >
-              <ChevronLeft size={32} className={`text-[${prevModule.color}]`} />
-              <span className="font-poppins font-medium">{prevModule.title}</span>
-            </Link>
-          ) : (
-            <div style={{ width: '160px' }} />
-          )}
-
-          {nextModule ? (
-            <Link
-              to={nextModule.path}
-              className={`flex items-center space-x-2 bg-white border-2 border-[${nextModule.color}] text-[${nextModule.color}] p-3 rounded-full shadow-md hover:shadow-lg`}
-            >
-              <span className="font-poppins font-medium">{nextModule.title}</span>
-              <ChevronRight size={32} className={`text-[${nextModule.color}]`} />
-            </Link>
-          ) : (
-            <div style={{ width: '160px' }} />
-          )}
-        </div>
-      </div>
+      <ModuleNav currentId="chat-room" />
 
       {/* Hero Section */}
       <section className="py-12 bg-white">

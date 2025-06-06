@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Layout from '@/components/Layout';
+import ModuleNav from '@/components/ModuleNav';
 import { Card, CardContent } from '@/components/ui/card';
 import {
   ArrowLeft,
@@ -12,8 +13,6 @@ import {
   Lock,
   FolderOpen,
   Star,
-  ChevronLeft,
-  ChevronRight,
 } from 'lucide-react';
 import {
   Accordion,
@@ -136,28 +135,7 @@ const DocumentsDetail: React.FC = () => {
         </div>
       </section>
 
-      {/* Sticky Navigation Arrows right below breadcrumb */}
-      <div className="sticky top-[56px] bg-white py-4 z-20 shadow-sm">
-        <div className="container mx-auto px-4 flex justify-between items-center">
-          {/* PREVIOUS: Home Repairs (boja #f3372b), ali samo obrub i tekst/ikona */}
-          <Link
-            to="/modules/home-repairs"
-            className="flex items-center space-x-2 bg-white border-2 border-[#f3372b] text-[#f3372b] p-3 rounded-full shadow-md hover:shadow-lg"
-          >
-            <ChevronLeft size={32} className="text-[#f3372b]" />
-            <span className="font-poppins font-medium">Home Repairs</span>
-          </Link>
-
-          {/* NEXT: Ride Sharing (boja #86be41), obrub i tekst/ikona */}
-          <Link
-            to="/modules/shared-rides"
-            className="flex items-center space-x-2 bg-white border-2 border-[#86be41] text-[#86be41] p-3 rounded-full shadow-md hover:shadow-lg"
-          >
-            <span className="font-poppins font-medium">Ride Sharing</span>
-            <ChevronRight size={32} className="text-[#86be41]" />
-          </Link>
-        </div>
-      </div>
+      <ModuleNav currentId="documents" />
 
       {/* Hero Section */}
       <section className="py-12 bg-white">
