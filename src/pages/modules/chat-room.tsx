@@ -21,7 +21,6 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 
-
 const ChatRoomDetail: React.FC = () => {
   const id = 'chat-room';
   const currentIndex = modulesList.findIndex((m) => m.id === id);
@@ -131,11 +130,11 @@ const ChatRoomDetail: React.FC = () => {
 
       <ModuleNav currentId="chat-room" />
 
-      {/* Hero Section */}
+      {/* Hero Section: Image & Text */}
       <section className="py-12 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto flex flex-col lg:flex-row items-start lg:items-center lg:space-x-8">
-            {/* Left: screenshot */}
+            {/* Screenshot */}
             <div className="w-full lg:w-1/2 mb-6 lg:mb-0 flex justify-center">
               <img
                 src={module.screenshot}
@@ -143,8 +142,7 @@ const ChatRoomDetail: React.FC = () => {
                 className="max-h-[500px] w-auto rounded-xl shadow-lg object-contain"
               />
             </div>
-
-            {/* Right: icon + text */}
+            {/* Text */}
             <div className="w-full lg:w-1/2">
               <div className="flex justify-center lg:justify-start mb-4">
                 <MessageSquare size={56} className={`text-[${accentColor}]`} />
@@ -170,41 +168,6 @@ const ChatRoomDetail: React.FC = () => {
               </div>
             </div>
           </div>
-
-          {/* Podcast Snippet */}
-          {module.youtubeVideoId && (
-            <div className="mt-10">
-              <div className="text-center mb-4">
-                <h2 className="font-poppins font-semibold text-xl lg:text-2xl text-gray-900">
-                  Listen to a Podcast Snippet About Chat Room
-                </h2>
-              </div>
-              <YouTubeEmbed
-                videoId={module.youtubeVideoId}
-                title="Chat Room Podcast Snippet"
-                className="max-w-3xl mx-auto"
-              />
-            </div>
-          )}
-
-          {/* Testimonial */}
-          {module.testimonial && (
-            <Card className="p-6 text-center my-8 bg-gray-50">
-              <CardContent className="p-0">
-                <div className="flex justify-center mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <blockquote className="font-inter text-base lg:text-lg text-gray-700 mb-2">
-                  {module.testimonial.quote}
-                </blockquote>
-                <p className="font-poppins font-semibold text-gray-900 text-sm lg:text-base">
-                  {module.testimonial.author}
-                </p>
-              </CardContent>
-            </Card>
-          )}
         </div>
       </section>
 
@@ -240,6 +203,25 @@ const ChatRoomDetail: React.FC = () => {
         </section>
       )}
 
+      {/* Testimonial */}
+      {module.testimonial && (
+        <Card className="p-6 text-center my-8 bg-gray-50">
+          <CardContent className="p-0">
+            <div className="flex justify-center mb-3">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+              ))}
+            </div>
+            <blockquote className="font-inter text-base lg:text-lg text-gray-700 mb-2">
+              {module.testimonial.quote}
+            </blockquote>
+            <p className="font-poppins font-semibold text-gray-900 text-sm lg:text-base">
+              {module.testimonial.author}
+            </p>
+          </CardContent>
+        </Card>
+      )}
+
       {/* FAQ */}
       {module.faq && module.faq.length > 0 && (
         <section className="py-12 bg-white">
@@ -263,6 +245,24 @@ const ChatRoomDetail: React.FC = () => {
                 ))}
               </Accordion>
             </div>
+          </div>
+        </section>
+      )}
+
+      {/* Podcast Snippet (YouTube) */}
+      {module.youtubeVideoId && (
+        <section className="py-12 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-4">
+              <h2 className="font-poppins font-semibold text-xl lg:text-2xl text-gray-900">
+                Listen to a Podcast Snippet About Chat Room
+              </h2>
+            </div>
+            <YouTubeEmbed
+              videoId={module.youtubeVideoId}
+              title="Chat Room Podcast Snippet"
+              className="max-w-3xl mx-auto"
+            />
           </div>
         </section>
       )}

@@ -1,9 +1,17 @@
+// src/App.jsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
+
+// NOVO: uvozi stranice za blog-1 i blog-2
+import Blog1 from "./pages/Blog1";
+import Blog2 from "./pages/Blog2";
+
+// Ako želiš i dalje imati dinamičke postove:
 import BlogPost from "./pages/BlogPost";
+
 import Contact from "./pages/Contact";
 import Modules from "./pages/Modules";
 import OfficialNotices from "./pages/modules/official-notices";
@@ -33,11 +41,23 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Glavne stranice */}
         <Route path="/" element={<Index />} />
         <Route path="/about" element={<About />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:id" element={<BlogPost />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/benefits" element={<Benefits />} />
+        <Route path="/how-it-works" element={<HowItWorks />} />
+        <Route path="/faq" element={<FAQ />} />
+
+        {/* Blog: lista i konkretni postovi */}
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/blog-1" element={<Blog1 />} />
+        <Route path="/blog/blog-2" element={<Blog2 />} />
+        {/* fallback za buduće postove */}
+        <Route path="/blog/:id" element={<BlogPost />} />
+
+        {/* Moduli */}
         <Route path="/modules" element={<Modules />} />
         <Route path="/modules/official-notices" element={<OfficialNotices />} />
         <Route path="/modules/chat-room" element={<ChatRoom />} />
@@ -56,10 +76,8 @@ function App() {
         <Route path="/modules/local-posts" element={<LocalPosts />} />
         <Route path="/modules/business-networking" element={<BusinessNetworking />} />
         <Route path="/modules/conference-rooms" element={<ConferenceRooms />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/benefits" element={<Benefits />} />
-        <Route path="/how-it-works" element={<HowItWorks />} />
-        <Route path="/faq" element={<FAQ />} />
+
+        {/* 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

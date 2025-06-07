@@ -208,7 +208,7 @@ const HowItWorks = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-poppins font-semibold text-3xl text-gray-900 mb-8">
-              Watch the Complete Setup
+              Watch the Promo Video
             </h2>
             <YouTubeEmbed 
               videoId="82Nsgn200iM"
