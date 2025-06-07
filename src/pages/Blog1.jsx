@@ -2,120 +2,139 @@
 import { Link } from 'react-router-dom';
 import Layout from '@/components/Layout';
 
+/**
+ * Blog1 - Smart Buildings, AI, and Digital Communities
+ * Final version: only one image at the end (Blog_1_pic_1.jpg)
+ */
 const Blog1 = () => {
-  const pics = [1, 2, 3, 4].map((i) => `/assets/blog_1_pic_${i}.png`);
-
   return (
     <Layout>
-      {/* Hero */}
-      <div className="relative h-96 overflow-hidden rounded-b-3xl shadow-lg mb-12">
-        <img
-          src="/assets/Blog_1.png"
-          alt="Digital Communities"
-          className="w-full h-full object-cover brightness-75"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70" />
-        <div className="absolute bottom-8 left-8 text-white max-w-xl">
-          <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
-            Digital Communities
+      {/* ===================== HERO ===================== */}
+      <header className="bg-gradient-to-br from-conexa-light-grey to-white py-20">
+        <div className="container mx-auto px-4 text-center max-w-4xl">
+          <h1 className="font-poppins font-bold text-4xl md:text-5xl lg:text-6xl text-gray-900 mb-4 tracking-tight">
+            Smart Buildings, AI, and Digital Communities
           </h1>
-          <p className="mt-2 text-lg md:text-xl font-light">
-            The Paradox of Digital Connectivity
+          <p className="font-inter text-xl md:text-2xl text-gray-600">
+            <em>The Paradox of Digital Connectivity</em>
           </p>
         </div>
-      </div>
+      </header>
 
-      {/* Article */}
-      <article className="prose lg:prose-xl mx-auto py-8 px-4">
-        <p>
-          We live in an era where our phones are our constant companions, delivering a new wave of notifications and likes every few seconds. However, despite ubiquitous online communication, global studies reveal surprisingly high rates of loneliness: 13% of Europeans feel isolated most of the time, while among young people (ages 18–24), that figure rises to 57%. It is within this contrast that the key paradox of our digital networks lies—they can connect us to the world, but not to the person living just next door.
-        </p>
+      {/* ===================== MAIN ===================== */}
+      <main className="py-16 bg-white">
+        <article className="prose prose-lg max-w-3xl mx-auto text-gray-800 prose-headings:text-conexa-primary prose-headings:font-poppins px-4">
+          {/* Intro */}
+          <p>
+            We live in an era where our <strong>phones are our constant companions</strong>, delivering a new wave of notifications and likes every few seconds. However, despite ubiquitous online communication, global studies reveal surprisingly high rates of loneliness: <strong>13% of Europeans feel isolated most of the time</strong>, while among young people (ages 18-24), that figure rises to <strong>57%</strong>. This stark contrast reveals the key paradox of our digital networks - they can connect us to the world, but <strong>not necessarily to the person living just next door</strong>.
+          </p>
 
-        {/* Inline image #1 */}
-        <figure className="my-8">
-          <img src={pics[0]} alt="Illustration of digital loneliness" className="w-full rounded-lg shadow-md" />
-          <figcaption className="text-sm text-gray-500 mt-2 text-center">
-            Digital notifications can’t replace eye contact.
-          </figcaption>
-        </figure>
+          <blockquote className="not-italic font-medium text-gray-700 border-l-4 border-conexa-primary pl-4">
+            "Man is by nature a social animal." - Aristotle
+          </blockquote>
 
-        <blockquote className="border-l-4 border-conexa-primary pl-4 italic text-lg">
-          “Man is by nature a social animal.” – Aristotle
-        </blockquote>
+          <p>
+            Aristotle's notion of sociability feels more relevant than ever in the age of algorithms, where the absence of <strong>genuine interaction</strong> can feel like a battle already lost. To restore true closeness, we must devise ways for the <strong>digital and the physical</strong> to work in harmonious synergy.
+          </p>
 
-        <p>
-          Aristotle’s notion of sociability feels more relevant than ever in the age of algorithms, where the absence of genuine interaction feels like a battle already lost. To restore true closeness, we must devise ways for the digital and the physical to operate in harmonious synergy.
-        </p>
+          {/* ===================== Orthogonality ===================== */}
+          <h2>Orthogonality of the Digital and the Neighbourhood</h2>
+          <p>
+            Over the centuries, urbanisation has brought advantages - opportunity, culture, infrastructure - but also <strong>anonymity, fragmented social ties</strong>, and the breakdown of traditional support networks. In <em>Bowling Alone</em>, Robert Putnam argues that when communal activities disappear, social capital quickly weakens.
+          </p>
+          <p>
+            While online groups can expand overnight, <strong>word of mouth in a real neighbourhood</strong> still travels fast - often reaching the first twenty doors in no time.
+          </p>
 
-        <h2>Orthogonality of the Digital and the Neighborhood</h2>
-        <p>
-          Over the centuries, urbanization has brought advantages (opportunities, culture, infrastructure) but also drawbacks—anonymity, fragmentation of social ties, and the breakdown of traditional support networks. In his work <em>Bowling Alone</em>, Robert Putnam extensively argued that the loss of communal activities leads to a weakening of social capital.
-        </p>
-        <p>
-          While online groups expand and grow, word of mouth in a real neighborhood still travels fast—often reaching the first 20 doors in no time. Mobile apps like WhatsApp and Viber have made communication easier, but they have not been able to replace the sense of trust that comes from a personal encounter and a glance over the fence.
-        </p>
+          {/* ===================== Psychology ===================== */}
+          <h2 className="text-3xl font-bold mt-16 mb-6 border-b border-gray-200 pb-2">
+            The Psychology of Neighbourhoods and Sense of Belonging
+          </h2>
+          <p>
+            In urban environments, researchers distinguish between <strong>satisfaction</strong> and <strong>belonging</strong>. Satisfaction shows which neighbourhood features matter day-to-day; belonging emerges through <strong>shared rituals and routines</strong>.
+          </p>
 
-        {/* Inline image #2 */}
-        <figure className="my-8">
-          <img src={pics[1]} alt="Neighborhood gossip over fence" className="w-full rounded-lg shadow-md" />
-          <figcaption className="text-sm text-gray-500 mt-2 text-center">
-            Word-of-mouth still reigns in tight-knit communities.
-          </figcaption>
-        </figure>
+          <p>
+            Sociologists Appold and Yuen, studying life-use diaries in Singapore, concluded that high-rise towers do not disrupt family life - provided <strong>shared spaces are well-designed</strong>.
+          </p>
 
-        <p>
-          Without physical closeness, digital interaction remains superficial. Psychologists Gifford and Sussman highlight three fundamental needs: the need for a comfortable shared space, a sense of security, and genuine social interaction. When any of these are missing, the city becomes a series of cold, technically perfect but emotionally empty structures.
-        </p>
+          {/* ===================== Phygital ===================== */}
+          <h2 className="text-3xl font-bold mt-16 mb-6 border-b border-gray-200 pb-2">
+            Phygital: The Synergy of Physical and Digital
+          </h2>
+          <p>
+            The modern city demands a <strong>phygital approach</strong>: digital commands that play out in the real world. Imagine a push notification for tomorrow's snow clearance, after which a neighbour (or an algorithm) schedules a slot for everyone.
+          </p>
+          <p>
+            In practice, phygital implementation guides each resident through: <strong>notification → confirmation → reminder → action</strong>.
+          </p>
 
-        <h2>The Psychology of Neighborhoods and Sense of Belonging</h2>
-        <p>
-          In urban environments, psychologists and sociologists distinguish between satisfaction (contentment with infrastructure, services, safety) and belonging (emotional connection and identity). Studying satisfaction reveals which neighborhood features matter daily—from clean streets to the availability of cafés. Belonging, on the other hand, emerges through shared rituals, routines, and a sense of “we.” It’s what motivates residents to trade a long paved hallway for a shared coffee in the building.
-        </p>
+          {/* ===================== Pillars ===================== */}
+          <h2 className="text-3xl font-bold mt-16 mb-6 border-b border-gray-200 pb-2">
+            Essential Elements of Quality Urban Life
+          </h2>
+          <h3>1. Space and Greenery</h3>
+          <p>Nature within the city has a <strong>regenerative effect</strong>.</p>
 
-        {/* Inline image #3 */}
-        <figure className="my-8">
-          <img src={pics[2]} alt="Residents sharing coffee" className="w-full rounded-lg shadow-md" />
-          <figcaption className="text-sm text-gray-500 mt-2 text-center">
-            Shared rituals spark real connections.
-          </figcaption>
-        </figure>
+          <h3>2. Safety and Reliability</h3>
+          <p>A sense of security comes not only from surveillance, but also from <strong>reliable neighbours</strong>.</p>
 
-        <p>
-          Sociologists Appold and Yuen, investigating life-use diaries in Singapore, concluded that high-rise towers do not disrupt family life—provided the design and spatial conditions are well-adapted. The key is the quality of the shared space, not the height of the building.
-        </p>
+          <h3>3. Acts of Community</h3>
+          <p>Without <strong>collective action</strong>, there is no belonging.</p>
 
-        <h2>Phygital: The Synergy of Physical and Digital</h2>
-        <p>
-          The modern city demands a phygital approach: digital commands that play out in the real world. Imagine a push notification for tomorrow’s snow clearance, after which a neighbor (or an algorithm) automatically schedules a time slot for everyone. This is not a distant future; this is Conexa.life today.
-        </p>
+          {/* ===================== Conexa ===================== */}
+          <h2 className="text-3xl font-bold mt-16 mb-6 border-b border-gray-200 pb-2">
+            Conexa.life at the Heart of the Story
+          </h2>
+          <p>
+            Conexa.life is not just another app - it aims to be the <strong>backbone of a new digital culture for neighbourhoods</strong>.
+          </p>
+          <p>
+            In this way, every resident becomes an <strong>active participant</strong> rather than a passive observer.
+          </p>
 
-        {/* Inline image #4 */}
-        <figure className="my-8">
-          <img src={pics[3]} alt="Phygital city app flow" className="w-full rounded-lg shadow-md" />
-          <figcaption className="text-sm text-gray-500 mt-2 text-center">
-            Notifications → Confirmation → Action.
-          </figcaption>
-        </figure>
+          {/* ===================== Conclusion ===================== */}
+          <h2>Conclusion - Returning the Warmth of the Neighbourhood</h2>
+          <p>
+            Digital technology solves many problems, yet <strong>neighbourhood ties remain irreplaceable</strong>.
+          </p>
+          <p>
+            Conexa.life is exactly that: a <strong>bridge between the digital and the real</strong>.
+          </p>
 
-        <p>
-          In practice, phygital implementation means that each resident goes through a continuous flow from their doorstep to the app: notification, confirmation, reminder, and final action—be it cleaning, a meeting, or survey analysis. Such a model blurs the line between the virtual and the real.
-        </p>
+          {/* Final Image */}
+          <img
+            src="/assets/Blog_1_pic_1.jpg"
+            alt="Community interacting through Conexa"
+            className="rounded-lg shadow-md w-full md:w-2/3 mx-auto my-12"
+            loading="lazy"
+          />
 
-        <h2>Conclusion – Returning the Warmth of the Neighborhood</h2>
-        <p>
-          In an era where digital technology eases many aspects of life, the loss of neighborhood ties becomes a loss of autonomy and support. Quality urban life is not defined by tall skyscrapers or super-fast internet, but by our relationships—with people and with place. When the digital and the physical are strategically connected, we get a phygital neighborhood that warms, connects, and protects. Conexa.life is exactly that bridge.
-        </p>
-      </article>
+          {/* CTA */}
+          <p className="text-center font-semibold mt-12">
+            <a
+              href="https://play.google.com/store/apps/details?id=dreamteamstudio.online.conexa"
+              className="underline hover:text-conexa-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Try Conexa.life for Free
+            </a>
+          </p>
+        </article>
+      </main>
 
-      {/* Back Link */}
-      <div className="text-center py-8">
-        <Link
-          to="/blog"
-          className="inline-block bg-conexa-primary text-white font-medium px-6 py-3 rounded-full hover:bg-conexa-dark transition"
-        >
-          ← Back to Blog
-        </Link>
-      </div>
+      {/* FOOTER */}
+      <footer className="py-12 bg-conexa-light-grey border-t border-gray-200">
+        <div className="container mx-auto px-4 text-center">
+          <Link
+            to="/blog"
+            className="inline-block bg-white border border-gray-300 hover:bg-gray-100 text-gray-800 font-medium px-6 py-3 rounded-full transition"
+          >
+            ← Back to Blog
+          </Link>
+        </div>
+      </footer>
     </Layout>
   );
 };

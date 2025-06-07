@@ -1,169 +1,171 @@
 import Layout from '@/components/Layout';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 import { Link } from 'react-router-dom';
-import {
-  Building,
-  MessageSquare,
-  HelpCircle,
-  Clipboard,
-  FileText,
-  Brain,
-  Calendar,
-  Camera,
-  Bell,
-  Volume2,
-  Zap,
-  Users
-} from 'lucide-react';
+import { Check } from 'lucide-react';
 
-const Pricing = () => {
-  const plans = [
-    {
-      name: 'Free Community',
-      price: '€0',
-      features: [
-        { title: 'Home Repairs (photo reporting & verified techs)', link: '/modules/home-repairs', icon: Zap },
-        { title: 'Geo-fenced Social Posts (local feed & anonymity)', link: '/modules/local-posts', icon: Users }
-      ],
-      cta: 'Get Started Free',
-      variant: 'outline'
-    },
-    {
-      name: 'Building Membership',
-      price: '€34',
-      period: '/ month / per building',
-      features: [
-        { title: 'Official Notices', icon: Building },
-        { title: 'Chat Room', icon: MessageSquare },
-        { title: 'Quiz', icon: HelpCircle },
-        { title: 'Bulletin Board', icon: Clipboard },
-        { title: 'Documents', icon: FileText },
-        { title: 'Wise Owl', icon: Brain },
-        { title: 'Shared Tasks', icon: Calendar },
-        { title: 'Security', icon: Camera },
-        { title: 'Alarm', icon: Bell },
-        { title: 'Noise Alerts', icon: Volume2 }
-      ],
-      cta: 'Activate for Your Building',
-      popular: true,
-      variant: 'solid'
-    }
-  ];
+/**
+ * -----------------------------------------------------------------------------
+ * Pricing Page (image served from public/assets)
+ * -----------------------------------------------------------------------------
+ * 1. Flat-fee badge: "per building · unlimited residents"
+ * 2. Bullet-list contains *all* existing & coming modules (names only)
+ * 3. Infographic loaded via <img src="/assets/pricing_1.png" ...>
+ * 4. FAQ accordion answers top visitor questions
+ * -----------------------------------------------------------------------------
+ */
 
-  return (
-    <Layout>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-conexa-light-grey to-white py-12">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="font-poppins font-semibold text-4xl lg:text-5xl text-gray-900 mb-4">
-            Simple, Transparent Pricing
-          </h1>
-          <p className="font-inter text-lg text-gray-600 max-w-3xl mx-auto mb-6">
-            Start free with community services or upgrade to unlock full building management tools.
-          </p>
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 max-w-md mx-auto">
-            <p className="font-inter text-sm text-blue-800">
-              <strong>Special Offer:</strong> First 7 days free!
-            </p>
-          </div>
-        </div>
-      </section>
+const allModules: string[] = [
+  // Building
+  'Official Notices',
+  'Chat Room',
+  'Quiz',
+  'Bulletin Board',
+  'Documents',
+  'Wise Owl',
+  'Shared Tasks',
+  'Security',
+  'Alarm',
+  'Noise Alerts',
+  // Community
+  'Marketplace',
+  'Home Repairs',
+  'Parking Sharing',
+  'Shared Rides',
+  'Local Posts',
+  // Special (coming)
+  'Business Networking (Coming 2025)',
+  'Conference Rooms (Coming 2026)'
+];
 
-      {/* Pricing Cards */}
-      <section className="py-12 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {plans.map((plan, index) => (
-                <Card
-                  key={index}
-                  className={`relative p-6 ${plan.popular ? 'border-2 border-conexa-primary shadow-lg' : ''}`}
-                >
-                  {plan.popular && (
-                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                      <span className="bg-conexa-primary text-white px-3 py-1 rounded-full text-sm font-inter font-medium">
-                        Most Popular
-                      </span>
-                    </div>
-                  )}
-                  <CardContent className="p-0">
-                    <div className="text-center mb-6">
-                      <h3 className="font-poppins font-semibold text-2xl text-gray-900 mb-1">
-                        {plan.name}
-                      </h3>
-                      <div className="mb-3">
-                        <span className="text-3xl font-poppins font-bold text-gray-900">{plan.price}</span>
-                        {plan.period && (
-                          <span className="font-inter text-gray-600 ml-2">{plan.period}</span>
-                        )}
-                      </div>
-                    </div>
+const faq: { q: string; a: string }[] = [
+  { q: 'Is the €34 charged per resident?', a: 'No. One flat fee per building, unlimited users.' },
+  { q: 'Are taxes included?', a: 'Prices shown are net. VAT/GST is added by App Store / Google Play based on your country.' },
+  { q: 'Any hidden costs?', a: 'Zero. No setup, storage or support fees.' },
+  { q: 'How do we pay?', a: 'Monthly auto-renew in App Store / Google Play. Cancel any time – billing stops immediately.' },
+  { q: 'What happens after the 7-day trial?', a: 'Your virtual building goes inactive until you purchase a membership. No automatic charge.' },
+  { q: 'Do future modules cost extra?', a: 'No. All current & future modules are included in Building Membership.' },
+  { q: 'User limits?', a: 'None today. A soft cap (500–1000) may be introduced later for performance reasons only.' },
+  { q: 'Can residents disable modules?', a: 'Yes. Building admins can toggle modules on/off at any time.' },
+  { q: 'Data & GDPR?', a: 'Hosted on Google Cloud (EU data centres). No personal data visible outside the building.' },
+  { q: 'Support?', a: 'In-app "Contact Support", live chat on website, or email info@conexa.life.' }
+];
 
-                    <ul className="space-y-2 mb-6">
-                      {plan.features.map((feature, i) => {
-                        const IconComp = feature.icon;
-                        return (
-                          <li key={i} className="flex items-center">
-                            <IconComp className="w-5 h-5 text-conexa-primary mr-2 flex-shrink-0" />
-                            {feature.link ? (
-                              <Link
-                                to={feature.link}
-                                className="font-inter text-gray-700 hover:underline"
-                              >
-                                {feature.title}
-                              </Link>
-                            ) : (
-                              <span className="font-inter text-gray-700">
-                                {feature.title}
-                              </span>
-                            )}
-                          </li>
-                        );
-                      })}
-                    </ul>
+const Pricing = () => (
+  <Layout>
+    {/* ─────────────────────────── Hero ─────────────────────────── */}
+    <section className="bg-gradient-to-br from-conexa-light-grey to-white py-14 text-center">
+      <div className="container mx-auto px-4 max-w-4xl">
+        <h1 className="font-poppins font-semibold text-4xl lg:text-5xl text-gray-900 mb-4">
+          Simple, Transparent Pricing
+        </h1>
+        <p className="font-inter text-lg text-gray-600 mb-8">
+          One flat monthly fee unlocks <strong>every module</strong> for every resident in your building.
+        </p>
+        <img
+          src="/assets/pricing_1.png"
+          width={800}
+          height={600}
+          alt="Infographic showing one flat fee for unlimited residents and modules"
+          className="mx-auto rounded-xl shadow-md"
+        />
+      </div>
+    </section>
 
-                    <a
-                      href="https://play.google.com/store/apps/details?id=dreamteamstudio.online.conexa&hl=en-US&ah=gz9G-WCHhz5UVkJh502cYJIcG4E"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Button
-                        className={`w-full py-4 text-lg transition-all hover:scale-105 ${
-                          plan.variant === 'solid'
-                            ? 'bg-conexa-primary text-white hover:bg-blue-700'
-                            : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
-                        }`}
-                      >
-                        {plan.cta}
-                      </Button>
-                    </a>
-                  </CardContent>
-                </Card>
-              ))}
+    {/* ──────────────────── Pricing Cards ──────────────────── */}
+    <section className="py-16 bg-white">
+      <div className="container mx-auto px-4 max-w-5xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Free Community Plan */}
+          <Card className="p-6 border border-gray-200">
+            <CardContent className="p-0">
+              <div className="text-center mb-6">
+                <h3 className="font-poppins font-semibold text-2xl text-gray-900 mb-1">Free Community</h3>
+                <div className="mb-3">
+                  <span className="text-3xl font-bold text-gray-900">€0</span>
+                  <span className="ml-2 text-gray-600">/ forever</span>
+                </div>
+              </div>
+              <ul className="space-y-1 mb-6 text-sm">
+                <li className="flex items-center"><Check className="w-4 h-4 text-conexa-primary mr-2" />Home Repairs</li>
+                <li className="flex items-center"><Check className="w-4 h-4 text-conexa-primary mr-2" />Local Posts</li>
+              </ul>
+              <a
+                href="https://play.google.com/store/apps/details?id=dreamteamstudio.online.conexa&hl=en-US&ah=gz9G-WCHhz5UVkJh502cYJIcG4E"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button className="w-full py-4 text-lg bg-gray-100 text-gray-900 hover:bg-gray-200 transition-all hover:scale-105">
+                  Get Started Free
+                </Button>
+              </a>
+            </CardContent>
+          </Card>
+
+          {/* Building Membership Plan */}
+          <Card className="relative p-6 border-2 border-conexa-primary shadow-lg">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+              <span className="bg-conexa-primary text-white px-3 py-1 rounded-full text-sm font-medium">Most Popular</span>
             </div>
-          </div>
-        </div>
-      </section>
+            <CardContent className="p-0">
+              <div className="text-center mb-6">
+                <h3 className="font-poppins font-semibold text-2xl text-gray-900 mb-1">Building Membership</h3>
+                <div className="mb-3 flex flex-col items-center">
+                  <div>
+                    <span className="text-3xl font-bold text-gray-900">€34</span>
+                    <span className="ml-2 text-gray-600">/ month</span>
+                  </div>
+                  <span className="mt-1 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-conexa-primary/10 text-conexa-primary">
+                    per building · unlimited residents
+                  </span>
+                </div>
+              </div>
 
-      {/* CTA Section */}
-      <section className="py-12 bg-conexa-light-grey">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="font-poppins font-semibold text-2xl text-gray-900 mb-2">
-            Explore All Modules
-          </h2>
-          <p className="font-inter text-lg text-gray-600 mb-4 max-w-2xl mx-auto">
-            Learn more about each module's capabilities and benefits.
-          </p>
-          <Link to="/modules">
-            <Button className="bg-conexa-primary hover:bg-blue-700 text-lg px-6 py-4 transition-all hover:scale-105">
-              View Modules
-            </Button>
-          </Link>
+              {/* All modules list */}
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-1 mb-6 text-sm">
+                {allModules.map((m) => (
+                  <li key={m} className="flex items-center">
+                    <Check className="w-4 h-4 text-conexa-primary mr-2 flex-shrink-0" />
+                    {m}
+                  </li>
+                ))}
+              </ul>
+
+              <p className="mb-4 text-sm text-gray-600 text-center">
+                No hidden fees · VAT added at checkout · Cancel anytime
+              </p>
+
+              <a
+                href="https://play.google.com/store/apps/details?id=dreamteamstudio.online.conexa&hl=en-US&ah=gz9G-WCHhz5UVkJh502cYJIcG4E"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button className="w-full py-4 text-lg bg-conexa-primary text-white hover:bg-blue-700 transition-all hover:scale-105" aria-label="Activate Building Membership – €34 flat fee">
+                  Activate for Your Building
+                </Button>
+              </a>
+            </CardContent>
+          </Card>
         </div>
-      </section>
-    </Layout>
-  );
-};
+      </div>
+    </section>
+
+    {/* ───────────────────────── FAQ ───────────────────────── */}
+    <section className="py-20 bg-conexa-light-grey">
+      <div className="container mx-auto px-4 max-w-4xl">
+        <h2 className="font-poppins font-semibold text-3xl text-gray-900 text-center mb-10">Frequently Asked Questions</h2>
+        <Accordion type="multiple" className="w-full">
+          {faq.map(({ q, a }) => (
+            <AccordionItem key={q} value={q} className="border-b border-gray-200">
+              <AccordionTrigger className="py-4 font-medium text-left text-gray-900">{q}</AccordionTrigger>
+              <AccordionContent className="pb-4 text-gray-600">{a}</AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    </section>
+  </Layout>
+);
 
 export default Pricing;

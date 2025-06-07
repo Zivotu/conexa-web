@@ -105,9 +105,23 @@ const Index = () => {
                 className="inline-flex items-center justify-center gap-3 text-conexa-primary hover:text-blue-700 transition-colors"
               >
                 <Play className="w-8 h-8" />
-                <span className="font-poppins font-semibold text-xl md:text-2xl">
-                  Watch a short video about the app and its features
-                </span>
+                <div className="flex flex-col items-center">
+  <span className="font-poppins font-semibold text-xl md:text-2xl">
+    Watch a short video about the app and its features
+  </span>
+  <a
+    href="https://www.youtube.com/watch?v=K-08rgQU75U&feature=youtu.be"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center justify-center gap-2 text-orange-500 hover:text-orange-700 mt-2 transition-colors"
+  >
+    <Megaphone className="w-5 h-5" />
+    <span className="font-inter font-medium text-base">
+      ...or listen to a short podcast about the idea
+    </span>
+  </a>
+</div>
+
               </a>
             </div>
           </div>
