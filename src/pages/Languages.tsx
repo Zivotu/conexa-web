@@ -1,6 +1,8 @@
 import Layout from "@/components/Layout";
+import { useTranslation } from "react-i18next";
 
 const Languages = () => {
+  const { t } = useTranslation();
   const languages = [
     { name: "English", flag: "🇬🇧" },
     { name: "العربية", flag: "🇦🇪" },
@@ -38,10 +40,10 @@ const Languages = () => {
       <section className="bg-gradient-to-br from-conexa-light-grey to-white py-20">
         <div className="container mx-auto px-4 text-center">
           <h1 className="font-poppins font-semibold text-4xl lg:text-5xl text-gray-900 mb-6">
-            Supported Languages in Conexa
+            {t('languages.title')}
           </h1>
           <p className="font-inter text-xl text-gray-600 max-w-3xl mx-auto">
-            The following languages are supported in the Conexa application:
+            {t('languages.description')}
           </p>
           <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
             {languages.map((lang) => (

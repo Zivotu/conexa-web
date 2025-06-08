@@ -8,5 +8,13 @@
     "contact": "Contatto",
     "languages": "Lingue",
     "startFree": "Inizia gratis"
+  },
+  "notFound": {
+    "message": "Oops! Page not found",
+    "returnHome": "Return to Home"
+  },
+  "languages": {
+    "title": "Supported Languages in Conexa",
+    "description": "The following languages are supported in the Conexa application:"
   }
 }
