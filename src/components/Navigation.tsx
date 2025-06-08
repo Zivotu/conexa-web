@@ -33,6 +33,13 @@ const Navigation = () => {
 
   const { t, i18n } = useTranslation();
 
+  const changeLanguage = (lang: string) => {
+    i18n.changeLanguage(lang);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('language', lang);
+    }
+  };
+
   useEffect(() => {
     document.documentElement.lang = i18n.language;
   }, [i18n.language]);
@@ -80,7 +87,7 @@ const Navigation = () => {
               aria-label="Select site language"
               className="h-9 px-3 text-sm font-inter text-gray-700 bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-[#FF7847] focus:border-transparent transition-all"
               value={i18n.language}
-              onChange={(e) => i18n.changeLanguage(e.target.value)}
+              onChange={(e) => changeLanguage(e.target.value)}
             >
               <option value="en">English</option>
               <option value="hr">Croatian</option>
@@ -147,7 +154,7 @@ const Navigation = () => {
                   aria-label="Select site language"
                   className="h-12 px-3 text-sm font-inter text-gray-700 bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-[#FF7847] focus:border-transparent transition-all"
                   value={i18n.language}
-                  onChange={(e) => i18n.changeLanguage(e.target.value)}
+                  onChange={(e) => changeLanguage(e.target.value)}
                 >
                   <option value="en">English</option>
                   <option value="hr">Croatian</option>

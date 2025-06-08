@@ -14,6 +14,9 @@ import es from '@/locales/es/translation.json';
 import it from '@/locales/it/translation.json';
 import ru from '@/locales/ru/translation.json';
 
+const storedLanguage =
+  typeof window !== 'undefined' ? localStorage.getItem('language') : null;
+
 void i18n
   .use(initReactI18next)
   .init({
@@ -31,7 +34,7 @@ void i18n
       it: { translation: it },
       ru: { translation: ru },
     },
-    lng: 'en',
+    lng: storedLanguage ?? 'en',
     fallbackLng: 'en',
     interpolation: { escapeValue: false },
   });
