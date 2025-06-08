@@ -1,11 +1,5 @@
-declare global {
-  interface Window {
-    google?: any;
-    googleTranslateElementInit?: () => void;
-  }
-}
-
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
@@ -16,13 +10,13 @@ const Navigation = () => {
   const location = useLocation();
 
   const navItems = [
-    { label: 'Features', href: '/modules' },
-    { label: 'How It Works', href: '/how-it-works' },
-    { label: 'Benefits', href: '/benefits' },
-    { label: 'Pricing', href: '/pricing' },
-    { label: 'Blog', href: '/blog' },
-    { label: 'Contact', href: '/contact' },
-    { label: 'Languages', href: '/languages' },
+    { key: 'features', href: '/modules' },
+    { key: 'howItWorks', href: '/how-it-works' },
+    { key: 'benefits', href: '/benefits' },
+    { key: 'pricing', href: '/pricing' },
+    { key: 'blog', href: '/blog' },
+    { key: 'contact', href: '/contact' },
+    { key: 'languages', href: '/languages' },
   ];
 
   const isActive = (href: string) => location.pathname === href;
@@ -37,120 +31,11 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const { t, i18n } = useTranslation();
+
   useEffect(() => {
-    const addGoogleTranslateScript = () => {
-      const script = document.createElement('script');
-      script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-      script.defer = true;
-      document.body.appendChild(script);
-
-      window.googleTranslateElementInit = () => {
-        new window.google.translate.TranslateElement(
-          {
-            pageLanguage: 'en',
-            includedLanguages: 'en,hr,de,fr,tr,no,pt,fi,el,es,it,ru',
-            layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
-          },
-          'google_translate_element'
-        );
-
-        // Auto-switch based on browser or location on first visit
-        const languages = ['en','hr','de','fr','tr','no','pt','fi','el','es','it','ru'];
-        let userLang = (navigator.language || '').substring(0, 2);
-        const first = !localStorage.getItem('conexaLangSet');
-
-        const detectByLocation = async () => {
-          try {
-            const map: Record<string, string> = {
-              HR: 'hr',
-              DE: 'de',
-              FR: 'fr',
-              TR: 'tr',
-              NO: 'no',
-              PT: 'pt',
-              FI: 'fi',
-              GR: 'el',
-              ES: 'es',
-              IT: 'it',
-              RU: 'ru'
-            };
-
-            const fetchByIp = async () => {
-              try {
-                const res = await fetch('https://ipapi.co/json/');
-                const data = await res.json();
-                return data?.country_code as string | undefined;
-              } catch {
-                return undefined;
-              }
-            };
-
-            let countryCode: string | undefined;
-
-            try {
-              const pos = await new Promise<GeolocationPosition>((resolve, reject) => {
-                if (!navigator.geolocation) return reject(new Error('geolocation unavailable'));
-                navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 5000 });
-              });
-              const { latitude, longitude } = (pos as GeolocationPosition).coords;
-              const geoRes = await fetch(
-                `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
-              );
-              const geoData = await geoRes.json();
-              countryCode = geoData?.countryCode;
-              if (!countryCode) {
-                countryCode = await fetchByIp();
-              }
-            } catch {
-              countryCode = await fetchByIp();
-            }
-
-            if (countryCode && map[countryCode]) {
-              userLang = map[countryCode];
-            }
-          } catch (err) {
-            console.error('Geo detection failed', err);
-          }
-
-          if (first && languages.includes(userLang)) {
-            translateTo(userLang);
-            localStorage.setItem('conexaLangSet', '1');
-          }
-        };
-
-        detectByLocation();
-      };
-    };
-
-    const translateTo = (lang: string) => {
-      const sel = document.querySelector('.goog-te-combo') as HTMLSelectElement;
-      if (sel && sel.value !== lang) {
-        sel.value = lang;
-        sel.dispatchEvent(new Event('change'));
-      }
-    };
-
-    // React to manual change
-    const handleLanguageChange = (e: Event) => {
-      const target = e.target as HTMLSelectElement;
-      if (target.id === 'lang-select' || target.id === 'lang-select-mobile') {
-        translateTo(target.value);
-        alert(
-          'This is an automatic translation of the page. We apologise for any errors in the text and thank you for your understanding.'
-        );
-      }
-    };
-
-    document.addEventListener('change', handleLanguageChange);
-
-    if (!window.google?.translate?.TranslateElement) {
-      addGoogleTranslateScript();
-    }
-
-    return () => {
-      document.removeEventListener('change', handleLanguageChange);
-    };
-  }, []);
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language]);
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -182,7 +67,7 @@ const Navigation = () => {
                     : 'text-gray-600 hover:text-[#FF7847]'
                 }`}
               >
-                {item.label}
+                {t(`nav.${item.key}`)}
               </Link>
             ))}
           </div>
@@ -190,10 +75,12 @@ const Navigation = () => {
           {/* CTA Button and Language Selector */}
           <div className="hidden lg:flex items-center space-x-3">
             {/* Language Selector */}
-            <select 
-              id="lang-select" 
+            <select
+              id="lang-select"
               aria-label="Select site language"
               className="h-9 px-3 text-sm font-inter text-gray-700 bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-[#FF7847] focus:border-transparent transition-all"
+              value={i18n.language}
+              onChange={(e) => i18n.changeLanguage(e.target.value)}
             >
               <option value="en">English</option>
               <option value="hr">Croatian</option>
@@ -214,12 +101,12 @@ const Navigation = () => {
               asChild
               aria-label="Start using Conexa for free today"
             >
-              <a 
+              <a
                 href="https://play.google.com/store/apps/details?id=dreamteamstudio.online.conexa&hl=en-US&ah=gz9G-WCHhz5UVkJh502cYJIcG4E"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Start Free Today
+                {t('nav.startFree')}
               </a>
             </Button>
           </div>
@@ -249,16 +136,18 @@ const Navigation = () => {
                   }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {item.label}
+                  {t(`nav.${item.key}`)}
                 </Link>
               ))}
 
               <div className="flex flex-col space-y-3 pt-4 border-t border-gray-100">
                 {/* Language Selector for Mobile */}
-                <select 
-                  id="lang-select-mobile" 
+                <select
+                  id="lang-select-mobile"
                   aria-label="Select site language"
                   className="h-12 px-3 text-sm font-inter text-gray-700 bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-[#FF7847] focus:border-transparent transition-all"
+                  value={i18n.language}
+                  onChange={(e) => i18n.changeLanguage(e.target.value)}
                 >
                   <option value="en">English</option>
                   <option value="hr">Croatian</option>
@@ -279,12 +168,12 @@ const Navigation = () => {
                   asChild
                   aria-label="Start using Conexa for free today"
                 >
-                  <a 
+                  <a
                     href="https://play.google.com/store/apps/details?id=dreamteamstudio.online.conexa&hl=en-US&ah=gz9G-WCHhz5UVkJh502cYJIcG4E"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Start Free Today
+                    {t('nav.startFree')}
                   </a>
                 </Button>
               </div>
