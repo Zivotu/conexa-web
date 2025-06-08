@@ -69,8 +69,6 @@ const Navigation = () => {
 
         const detectByLocation = async () => {
           try {
-            const res = await fetch('https://ipapi.co/json/');
-            const data = await res.json();
             const map: Record<string, string> = {
               HR: 'hr',
               DE: 'de',
@@ -84,8 +82,39 @@ const Navigation = () => {
               IT: 'it',
               RU: 'ru'
             };
-            if (data?.country_code && map[data.country_code]) {
-              userLang = map[data.country_code];
+
+            const fetchByIp = async () => {
+              try {
+                const res = await fetch('https://ipapi.co/json/');
+                const data = await res.json();
+                return data?.country_code as string | undefined;
+              } catch {
+                return undefined;
+              }
+            };
+
+            let countryCode: string | undefined;
+
+            try {
+              const pos = await new Promise<GeolocationPosition>((resolve, reject) => {
+                if (!navigator.geolocation) return reject(new Error('geolocation unavailable'));
+                navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 5000 });
+              });
+              const { latitude, longitude } = (pos as GeolocationPosition).coords;
+              const geoRes = await fetch(
+                `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+              );
+              const geoData = await geoRes.json();
+              countryCode = geoData?.countryCode;
+              if (!countryCode) {
+                countryCode = await fetchByIp();
+              }
+            } catch {
+              countryCode = await fetchByIp();
+            }
+
+            if (countryCode && map[countryCode]) {
+              userLang = map[countryCode];
             }
           } catch (err) {
             console.error('Geo detection failed', err);
