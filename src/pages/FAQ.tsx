@@ -29,7 +29,7 @@ const FAQ = () => {
     },
     {
       question: "What languages does Conexa support?",
-      answer: "Conexa is available in multiple languages including English, Croatian, German, French, Turkish, Norwegian, Portuguese, Finnish, Greek, Spanish, Italian and Russian. All modules support multi-language content from residents."
+      answer: "Conexa currently supports 12 languages: English, Croatian, German, French, Turkish, Norwegian, Portuguese, Finnish, Greek, Spanish, Italian and Russian. All modules support multi-language content from residents."
     },
     {
       question: "Do I need technical skills to use Conexa?",
