@@ -45,22 +45,14 @@ const Navigation = () => {
       document.body.appendChild(script);
 
       window.googleTranslateElementInit = () => {
-        new window.google.translate.TranslateElement({
-          pageLanguage: 'en',
-          includedLanguages: 'en,hr,de,fr,tr,no,pt,fi,el,es,it,ru',
-          autoDisplay: false,
-          layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
-        });
-
-        // Hide default Google elements
-        const css = `
-          .goog-logo-link, .goog-te-gadget span, .goog-te-banner-frame { display:none!important }
-          body { top:0!important }
-          .goog-te-combo { position: absolute; left: -9999px; opacity: 0; }
-        `;
-        const styleElement = document.createElement('style');
-        styleElement.innerHTML = css;
-        document.head.appendChild(styleElement);
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: 'en',
+            includedLanguages: 'en,hr,de,fr,tr,no,pt,fi,el,es,it,ru',
+            layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+          },
+          'google_translate_element'
+        );
 
         // Auto-switch based on browser or location on first visit
         const languages = ['en','hr','de','fr','tr','no','pt','fi','el','es','it','ru'];
@@ -143,6 +135,9 @@ const Navigation = () => {
       const target = e.target as HTMLSelectElement;
       if (target.id === 'lang-select' || target.id === 'lang-select-mobile') {
         translateTo(target.value);
+        alert(
+          'This is an automatic translation of the page. We apologise for any errors in the text and thank you for your understanding.'
+        );
       }
     };
 
