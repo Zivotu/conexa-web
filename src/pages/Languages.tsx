@@ -2,18 +2,18 @@ import Layout from '@/components/Layout';
 
 const Languages = () => {
   const languages = [
-    'English',
-    'Croatian',
-    'German',
-    'French',
-    'Turkish',
-    'Norwegian',
-    'Portuguese',
-    'Finnish',
-    'Greek',
-    'Spanish',
-    'Italian',
-    'Russian'
+    { name: 'English', flag: '🇬🇧' },
+    { name: 'Croatian', flag: '🇭🇷' },
+    { name: 'German', flag: '🇩🇪' },
+    { name: 'French', flag: '🇫🇷' },
+    { name: 'Turkish', flag: '🇹🇷' },
+    { name: 'Norwegian', flag: '🇳🇴' },
+    { name: 'Portuguese', flag: '🇵🇹' },
+    { name: 'Finnish', flag: '🇫🇮' },
+    { name: 'Greek', flag: '🇬🇷' },
+    { name: 'Spanish', flag: '🇪🇸' },
+    { name: 'Italian', flag: '🇮🇹' },
+    { name: 'Russian', flag: '🇷🇺' }
   ];
 
   return (
@@ -26,11 +26,14 @@ const Languages = () => {
           <p className="font-inter text-xl text-gray-600 max-w-3xl mx-auto">
             Conexa currently supports the following languages:
           </p>
-          <ul className="mt-6 space-y-2 font-inter text-gray-700">
+          <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
             {languages.map((lang) => (
-              <li key={lang}>{lang}</li>
+              <div key={lang.name} className="flex flex-col items-center space-y-3">
+                <span className="text-5xl" role="img" aria-label={lang.name + ' flag'}>{lang.flag}</span>
+                <span className="font-inter text-lg text-gray-700">{lang.name}</span>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
     </Layout>
