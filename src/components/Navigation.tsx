@@ -22,6 +22,7 @@ const Navigation = () => {
     { label: 'Pricing', href: '/pricing' },
     { label: 'Blog', href: '/blog' },
     { label: 'Contact', href: '/contact' },
+    { label: 'Languages', href: '/languages' },
   ];
 
   const isActive = (href: string) => location.pathname === href;
@@ -46,7 +47,7 @@ const Navigation = () => {
       window.googleTranslateElementInit = () => {
         new window.google.translate.TranslateElement({
           pageLanguage: 'en',
-          includedLanguages: 'en,hr,de',
+          includedLanguages: 'en,hr,de,fr,tr,no,pt,fi,el,es,it,ru',
           autoDisplay: false,
           layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
         });
@@ -61,13 +62,42 @@ const Navigation = () => {
         styleElement.innerHTML = css;
         document.head.appendChild(styleElement);
 
-        // Browser-language auto-switch on first visit
-        const userLang = (navigator.language || '').substring(0, 2);
+        // Auto-switch based on browser or location on first visit
+        const languages = ['en','hr','de','fr','tr','no','pt','fi','el','es','it','ru'];
+        let userLang = (navigator.language || '').substring(0, 2);
         const first = !localStorage.getItem('conexaLangSet');
-        if (first && ['hr', 'de'].includes(userLang)) {
-          translateTo(userLang);
-          localStorage.setItem('conexaLangSet', '1');
-        }
+
+        const detectByLocation = async () => {
+          try {
+            const res = await fetch('https://ipapi.co/json/');
+            const data = await res.json();
+            const map: Record<string, string> = {
+              HR: 'hr',
+              DE: 'de',
+              FR: 'fr',
+              TR: 'tr',
+              NO: 'no',
+              PT: 'pt',
+              FI: 'fi',
+              GR: 'el',
+              ES: 'es',
+              IT: 'it',
+              RU: 'ru'
+            };
+            if (data?.country_code && map[data.country_code]) {
+              userLang = map[data.country_code];
+            }
+          } catch (err) {
+            console.error('Geo detection failed', err);
+          }
+
+          if (first && languages.includes(userLang)) {
+            translateTo(userLang);
+            localStorage.setItem('conexaLangSet', '1');
+          }
+        };
+
+        detectByLocation();
       };
     };
 
@@ -144,6 +174,15 @@ const Navigation = () => {
               <option value="en">English</option>
               <option value="hr">Croatian</option>
               <option value="de">German</option>
+              <option value="fr">French</option>
+              <option value="tr">Turkish</option>
+              <option value="no">Norwegian</option>
+              <option value="pt">Portuguese</option>
+              <option value="fi">Finnish</option>
+              <option value="el">Greek</option>
+              <option value="es">Spanish</option>
+              <option value="it">Italian</option>
+              <option value="ru">Russian</option>
             </select>
 
             <Button 
@@ -200,6 +239,15 @@ const Navigation = () => {
                   <option value="en">English</option>
                   <option value="hr">Croatian</option>
                   <option value="de">German</option>
+                  <option value="fr">French</option>
+                  <option value="tr">Turkish</option>
+                  <option value="no">Norwegian</option>
+                  <option value="pt">Portuguese</option>
+                  <option value="fi">Finnish</option>
+                  <option value="el">Greek</option>
+                  <option value="es">Spanish</option>
+                  <option value="it">Italian</option>
+                  <option value="ru">Russian</option>
                 </select>
 
                 <Button 
