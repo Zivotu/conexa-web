@@ -8,6 +8,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default defineConfig(() => ({
+  // Relativne putanje → build se može poslužiti iz bilo kojeg direktorija
+  base: './',
   server: {
     host: '::',
     port: 8080,
