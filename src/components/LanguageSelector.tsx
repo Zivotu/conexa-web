@@ -1,23 +1,20 @@
-import i18n from '@/lib/i18n';
-
-const languages = [
-  { code: 'en', label: 'EN' },
-  { code: 'de', label: 'DE' },
-  { code: 'hr', label: 'HR' },
-  { code: 'es', label: 'ES' },
-];
+import { useState } from 'react';
+import i18n, { supportedLanguages } from '@/lib/i18n';
 
 const LanguageSelector = () => {
+  const [lang, setLang] = useState(i18n.language);
+
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const lang = e.target.value;
-    i18n.changeLanguage(lang);
+    const newLang = e.target.value;
+    i18n.changeLanguage(newLang);
+    setLang(newLang);
   };
 
   return (
-    <select onChange={handleChange} className="border rounded px-2 py-1 text-sm">
-      {languages.map(({ code, label }) => (
+    <select value={lang} onChange={handleChange} className="border rounded px-2 py-1 text-sm">
+      {supportedLanguages.map((code) => (
         <option key={code} value={code}>
-          {label}
+          {code.toUpperCase()}
         </option>
       ))}
     </select>
