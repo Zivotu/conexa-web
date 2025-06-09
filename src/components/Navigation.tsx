@@ -38,7 +38,7 @@ const Navigation = ({ offset = 0 }: NavigationProps) => {
 
   return (
     <nav
-      style={{ top: offset + 100 }}
+      style={{ top: offset + 50 }}
       className={`fixed left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm translate-y-0'
