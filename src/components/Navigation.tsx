@@ -4,7 +4,11 @@ import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import LanguageSelector from './LanguageSelector';
 
-const Navigation = () => {
+interface NavigationProps {
+  offset?: number;
+}
+
+const Navigation = ({ offset = 0 }: NavigationProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
@@ -33,13 +37,16 @@ const Navigation = () => {
   const ctaLabel = 'Start Free Today';
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm translate-y-0' 
-        : location.pathname === '/' 
-          ? 'bg-transparent translate-y-0' 
-          : 'bg-white/95 backdrop-blur-sm border-b border-gray-100 translate-y-0'
-    }`}>
+    <nav
+      style={{ top: offset }}
+      className={`fixed left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm translate-y-0'
+          : location.pathname === '/'
+            ? 'bg-transparent translate-y-0'
+            : 'bg-white/95 backdrop-blur-sm border-b border-gray-100 translate-y-0'
+      }`}
+    >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
