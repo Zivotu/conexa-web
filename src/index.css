@@ -78,9 +78,12 @@
 
 /* Hide Google Translate default elements */
 .goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
 .goog-logo-link,
 #google_translate_element,
-.goog-te-gadget {
+.goog-te-gadget,
+#goog-gt-tt,
+.goog-tooltip {
   display: none !important;
 }
 body { top: 0 !important; }
