@@ -75,3 +75,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Hide Google Translate default elements */
+.goog-te-banner-frame,
+.goog-logo-link,
+#google_translate_element,
+.goog-te-gadget {
+  display: none !important;
+}
+body { top: 0 !important; }
+

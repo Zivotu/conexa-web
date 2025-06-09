@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
+import LanguageSelector from './LanguageSelector';
 
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -66,8 +67,9 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden lg:flex items-center">
+          {/* CTA Button and Language */}
+          <div className="hidden lg:flex items-center space-x-4">
+            <LanguageSelector />
             <Button
               className="bg-[#FF7847] hover:bg-orange-600 font-inter text-sm transition-all hover:scale-105 shadow-sm"
               asChild
@@ -113,6 +115,7 @@ const Navigation = () => {
               ))}
 
               <div className="flex flex-col space-y-3 pt-4 border-t border-gray-100">
+                <LanguageSelector />
                 <Button
                   className="bg-[#FF7847] hover:bg-orange-600 font-inter text-sm h-12 w-full"
                   asChild
