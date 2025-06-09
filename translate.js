@@ -15,7 +15,8 @@ if (!API_KEY) {
 }
 
 const MAX_CHARS = 5000;
-const BASE_PATH = 'public/locales';
+// Locale files are stored under src/locales
+const BASE_PATH = 'src/locales';
 const BASE_LANG = 'en';
 const TARGET_LANGS = ['de', 'hr', 'es'];
 
