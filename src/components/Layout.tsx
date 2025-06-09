@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Navigation from './Navigation';
 import Footer from './Footer';
 
@@ -8,10 +9,28 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const [toolbarHeight, setToolbarHeight] = useState(0);
+
+  useEffect(() => {
+    const update = () => {
+      const banner = document.querySelector<HTMLIFrameElement>('.goog-te-banner-frame');
+      const height = banner ? banner.getBoundingClientRect().height : 0;
+      setToolbarHeight(height);
+    };
+
+    update();
+    const observer = new MutationObserver(update);
+    observer.observe(document.body, { childList: true, subtree: true });
+    window.addEventListener('resize', update);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', update);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <Navigation offset={TOOLBAR_OFFSET} />
-      <main className="flex-1" style={{ paddingTop: 64 + TOOLBAR_OFFSET }}>
+
         {children}
       </main>
       <Footer />
