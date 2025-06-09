@@ -33,20 +33,33 @@ const LanguageSelector = () => {
     }
   }, []);
 
+  const hideBanner = () => {
+    const frame = document.querySelector<HTMLIFrameElement>('iframe.goog-te-banner-frame');
+    if (frame) {
+      frame.style.display = 'none';
+    }
+    document.body.style.top = '0px';
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const lang = e.target.value;
     const combo = document.querySelector<HTMLSelectElement>('.goog-te-combo');
     if (combo) {
       combo.value = lang;
       combo.dispatchEvent(new Event('change'));
+      hideBanner();
     }
   };
 
   return (
-    <div>
-      <select onChange={handleChange} className="border rounded px-2 py-1 text-sm">
+    <div className="notranslate" translate="no">
+      <select
+        onChange={handleChange}
+        className="notranslate border rounded px-2 py-1 text-sm"
+        translate="no"
+      >
         {languages.map(({ code, label }) => (
-          <option key={code} value={code}>
+          <option key={code} value={code} className="notranslate" translate="no">
             {label}
           </option>
         ))}
