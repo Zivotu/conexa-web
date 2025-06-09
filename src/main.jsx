@@ -4,7 +4,6 @@ import './index.css'
 import App from './App.jsx'
 import '@fontsource/inter';
 import '@fontsource/poppins';
-import './lib/i18n';
 
 
 createRoot(document.getElementById('root')).render(

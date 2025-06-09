@@ -35,7 +35,6 @@ import Pricing from "./pages/Pricing";
 import Benefits from "./pages/Benefits";
 import HowItWorks from "./pages/HowItWorks";
 import FAQ from "./pages/FAQ";
-import Languages from "./pages/Languages";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -50,7 +49,6 @@ function App() {
         <Route path="/benefits" element={<Benefits />} />
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/faq" element={<FAQ />} />
-        <Route path="/languages" element={<Languages />} />
 
         {/* Blog: lista i konkretni postovi */}
         <Route path="/blog" element={<Blog />} />

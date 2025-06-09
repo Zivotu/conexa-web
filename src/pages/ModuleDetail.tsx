@@ -99,7 +99,6 @@ const ModuleDetail = () => {
         'Admin controls for notice management',
         'Deadline reminders for voting',
         'Anonymous voting options',
-        'Multi-language support',
         'PDF export of results'
       ],
       benefits: [
