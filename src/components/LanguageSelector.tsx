@@ -1,22 +1,27 @@
 import { useState } from 'react';
-import i18n, { supportedLanguages } from '@/lib/i18n';
+import { useTranslation } from 'react-i18next';
+import { supportedLanguages } from '@/lib/i18n';
 
 const LanguageSelector = () => {
-  const [lang, setLang] = useState(i18n.language);
+  const { i18n: i18next } = useTranslation();
+  const [lang, setLang] = useState(i18next.language);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newLang = e.target.value;
-    i18n.changeLanguage(newLang);
+    i18next.changeLanguage(newLang);
     setLang(newLang);
   };
 
   return (
     <select value={lang} onChange={handleChange} className="border rounded px-2 py-1 text-sm">
-      {supportedLanguages.map((code) => (
-        <option key={code} value={code}>
-          {code.toUpperCase()}
-        </option>
-      ))}
+      {supportedLanguages.map((code) => {
+        const label = new Intl.DisplayNames([i18next.language], { type: 'language' }).of(code);
+        return (
+          <option key={code} value={code}>
+            {label ?? code.toUpperCase()}
+          </option>
+        );
+      })}
     </select>
   );
 };
