@@ -70,7 +70,6 @@ const Footer = () => {
               <li><Link to="/blog" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">Blog</Link></li>
               <li><Link to="/contact" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">Contact</Link></li>
               <li><Link to="/faq" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">FAQ</Link></li>
-              <li><Link to="/languages" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">Languages</Link></li>
             </ul>
           </div>
         </div>

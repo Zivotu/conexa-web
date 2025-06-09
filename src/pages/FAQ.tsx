@@ -28,10 +28,6 @@ const FAQ = () => {
       answer: "Building admins choose which modules to activate, but they can also set up democratic voting for residents to decide together. Different modules can have different permission settings based on your building's needs."
     },
     {
-      question: "What languages does Conexa support?",
-      answer: "Conexa currently supports 12 languages: English, Croatian, German, French, Turkish, Norwegian, Portuguese, Finnish, Greek, Spanish, Italian and Russian. All modules support multi-language content from residents."
-    },
-    {
       question: "Do I need technical skills to use Conexa?",
       answer: "Not at all! Conexa is designed for everyone, regardless of technical experience. The app guides you through setup with simple steps, and our support team is always available to help."
     }
