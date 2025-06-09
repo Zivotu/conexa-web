@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
@@ -13,13 +14,15 @@ const Navigation = ({ offset = 0 }: NavigationProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
+  const { t } = useTranslation();
+
   const navItems = [
-    { label: 'Features', href: '/modules' },
-    { label: 'How It Works', href: '/how-it-works' },
-    { label: 'Benefits', href: '/benefits' },
-    { label: 'Pricing', href: '/pricing' },
-    { label: 'Blog', href: '/blog' },
-    { label: 'Contact', href: '/contact' },
+    { label: t('nav.features'), href: '/modules' },
+    { label: t('nav.how_it_works'), href: '/how-it-works' },
+    { label: t('nav.benefits'), href: '/benefits' },
+    { label: t('nav.pricing'), href: '/pricing' },
+    { label: t('nav.blog'), href: '/blog' },
+    { label: t('nav.contact'), href: '/contact' },
   ];
 
   const isActive = (href: string) => location.pathname === href;
@@ -34,7 +37,7 @@ const Navigation = ({ offset = 0 }: NavigationProps) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const ctaLabel = 'Start Free Today';
+  const ctaLabel = t('nav.cta');
 
   return (
     <nav
