@@ -25,10 +25,12 @@ i18n
   .init({
     resources,
     fallbackLng: 'en',
+    supportedLngs: supportedLanguages,
     interpolation: {
       escapeValue: false,
     },
     detection: {
+      order: ['localStorage', 'navigator', 'htmlTag', 'querystring'],
       lookupLocalStorage: 'i18nextLng',
       caches: ['localStorage'],
     },
