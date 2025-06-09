@@ -10,3 +10,7 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Translation script
+
+Run `node translate.js` to generate German (`de`), Croatian (`hr`) and Spanish (`es`) locale files using the Google Cloud Translation API. Place your API key in a `.env` file as `GOOGLE_API_KEY=YOUR_KEY` before executing.
