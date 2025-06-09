@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
-import LanguageSelector from './LanguageSelector';
 
 interface NavigationProps {
   offset?: number;
@@ -14,15 +12,13 @@ const Navigation = ({ offset = 0 }: NavigationProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
-  const { t } = useTranslation();
-
   const navItems = [
-    { label: t('nav.features'), href: '/modules' },
-    { label: t('nav.how_it_works'), href: '/how-it-works' },
-    { label: t('nav.benefits'), href: '/benefits' },
-    { label: t('nav.pricing'), href: '/pricing' },
-    { label: t('nav.blog'), href: '/blog' },
-    { label: t('nav.contact'), href: '/contact' },
+    { label: 'Features', href: '/modules' },
+    { label: 'How It Works', href: '/how-it-works' },
+    { label: 'Benefits', href: '/benefits' },
+    { label: 'Pricing', href: '/pricing' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Contact', href: '/contact' },
   ];
 
   const isActive = (href: string) => location.pathname === href;
@@ -37,7 +33,7 @@ const Navigation = ({ offset = 0 }: NavigationProps) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const ctaLabel = t('nav.cta');
+  const ctaLabel = 'Start Free Today';
 
   return (
     <nav
@@ -77,9 +73,8 @@ const Navigation = ({ offset = 0 }: NavigationProps) => {
             ))}
           </div>
 
-          {/* CTA Button and Language */}
+          {/* CTA Button */}
           <div className="hidden lg:flex items-center space-x-4">
-            <LanguageSelector />
             <Button
               className="bg-[#FF7847] hover:bg-orange-600 font-inter text-sm transition-all hover:scale-105 shadow-sm"
               asChild
@@ -125,7 +120,6 @@ const Navigation = ({ offset = 0 }: NavigationProps) => {
               ))}
 
               <div className="flex flex-col space-y-3 pt-4 border-t border-gray-100">
-                <LanguageSelector />
                 <Button
                   className="bg-[#FF7847] hover:bg-orange-600 font-inter text-sm h-12 w-full"
                   asChild

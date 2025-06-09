@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import HeroCarousel from "@/components/HeroCarousel";
@@ -25,7 +24,6 @@ import {
 } from "@/components/ui/accordion";
 
 const Index = () => {
-  const { t } = useTranslation();
   // State za detekciju širine ekrana
   const [isDesktop, setIsDesktop] = useState(false);
   // State za banner popup
@@ -71,17 +69,17 @@ const Index = () => {
                 <X className="w-6 h-6" />
               </button>
               <h1 className="font-poppins font-bold text-3xl text-gray-900 mb-4 text-center">
-                {t('index.banner_title')}
+                Welcome to Conexa
               </h1>
               <p className="font-inter text-gray-700 text-center mb-6">
-                {t('index.banner_text')}
+                The all-in-one local community app—manage your building, chat with neighbors, and stay updated on nearby events.
               </p>
               <div className="text-center">
                 <Button
                   onClick={() => setShowBanner(false)}
                   className="bg-conexa-primary text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
                 >
-                  {t('index.get_started')}
+                  Get Started
                 </Button>
               </div>
             </div>
@@ -109,7 +107,7 @@ const Index = () => {
                 <Play className="w-8 h-8" />
                 <div className="flex flex-col items-center">
   <span className="font-poppins font-semibold text-xl md:text-2xl">
-    {t('index.watch_video')}
+    Watch a short video about the app and its features
   </span>
   <a
     href="https://www.youtube.com/watch?v=K-08rgQU75U&feature=youtu.be"
@@ -119,7 +117,7 @@ const Index = () => {
   >
     <Megaphone className="w-5 h-5" />
     <span className="font-inter font-medium text-base">
-      {t('index.listen_podcast')}
+      ...or listen to a short podcast about the idea
     </span>
   </a>
 </div>
@@ -134,7 +132,7 @@ const Index = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-6">
               <h2 className="font-poppins font-semibold text-3xl text-white mb-4">
-                {t('index.results_title')}
+                Real Results After Only 3 Months
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -143,7 +141,7 @@ const Index = () => {
                   85%
                 </div>
                 <p className="font-inter text-white/90">
-                  {t('index.result_participation')}
+                  More community participation
                 </p>
               </div>
               <div className="text-center bg-white/10 backdrop-blur-sm p-6 rounded-xl">
@@ -151,7 +149,7 @@ const Index = () => {
                   60%
                 </div>
                 <p className="font-inter text-white/90">
-                  {t('index.result_faster')}
+                  Faster issue resolution
                 </p>
               </div>
               <div className="text-center bg-white/10 backdrop-blur-sm p-6 rounded-xl">
@@ -159,7 +157,7 @@ const Index = () => {
                   90%
                 </div>
                 <p className="font-inter text-white/90">
-                  {t('index.result_satisfaction')}
+                  Resident satisfaction
                 </p>
               </div>
             </div>
@@ -172,10 +170,10 @@ const Index = () => {
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="font-poppins font-semibold text-4xl text-gray-900 mb-4">
-                  {t('index.features_title')}
+                  Everything Your Building Needs
                 </h2>
                 <p className="font-inter text-xl text-gray-600 max-w-3xl mx-auto">
-                  {t('index.features_subtitle')}
+                  All the essential modules to streamline communication, boost community engagement, and simplify building management.
                 </p>
               </div>
 
@@ -187,10 +185,10 @@ const Index = () => {
                     <Vote className="w-6 h-6 text-conexa-primary group-hover:text-white" />
                   </div>
                   <h3 className="font-poppins font-semibold text-xl text-gray-900 mb-2">
-                    {t('index.instant_voting')}
+                    Instant Digital Voting
                   </h3>
                   <p className="font-inter text-gray-600 text-sm">
-                    {t('index.instant_voting_desc')}
+                    Transform building decisions with secure digital polls and instant notifications.
                   </p>
                 </div>
 
@@ -200,10 +198,10 @@ const Index = () => {
                     <Megaphone className="w-6 h-6 text-conexa-primary group-hover:text-white" />
                   </div>
                   <h3 className="font-poppins font-semibold text-xl text-gray-900 mb-2">
-                    {t('index.official_announcements')}
+                    Official Announcements
                   </h3>
                   <p className="font-inter text-gray-600 text-sm">
-                    {t('index.official_announcements_desc')}
+                    Keep everyone informed with push notifications and digital notice board.
                   </p>
                 </div>
 
@@ -213,10 +211,10 @@ const Index = () => {
                     <MessageCircle className="w-6 h-6 text-conexa-primary group-hover:text-white" />
                   </div>
                   <h3 className="font-poppins font-semibold text-xl text-gray-900 mb-2">
-                    {t('index.community_chat')}
+                    Community Chat
                   </h3>
                   <p className="font-inter text-gray-600 text-sm">
-                    {t('index.community_chat_desc')}
+                    Private group chat for building residents to connect and share instantly.
                   </p>
                 </div>
 
@@ -226,10 +224,10 @@ const Index = () => {
                     <Wrench className="w-6 h-6 text-conexa-primary group-hover:text-white" />
                   </div>
                   <h3 className="font-poppins font-semibold text-xl text-gray-900 mb-2">
-                    {t('index.maintenance_requests')}
+                    Maintenance Requests
                   </h3>
                   <p className="font-inter text-gray-600 text-sm">
-                    {t('index.maintenance_requests_desc')}
+                    Report issues with photos and connect with verified local technicians.
                   </p>
                 </div>
 
@@ -239,10 +237,10 @@ const Index = () => {
                     <ShoppingBag className="w-6 h-6 text-conexa-primary group-hover:text-white" />
                   </div>
                   <h3 className="font-poppins font-semibold text-xl text-gray-900 mb-2">
-                    {t('index.marketplace')}
+                    Marketplace
                   </h3>
                   <p className="font-inter text-gray-600 text-sm">
-                    {t('index.marketplace_desc')}
+                    Discover local offers and events in your neighborhood with geo-targeting.
                   </p>
                 </div>
 
@@ -255,10 +253,10 @@ const Index = () => {
                     <ClipboardList className="w-6 h-6 text-conexa-primary group-hover:text-white" />
                   </div>
                   <h3 className="font-poppins font-semibold text-xl text-gray-900 mb-2">
-                    {t('index.bulletin_board')}
+                    Bulletin Board
                   </h3>
                   <p className="font-inter text-gray-600 text-sm">
-                    {t('index.bulletin_board_desc')}
+                    A smarter way to share what matters with local advertising and community posts.
                   </p>
                 </Link>
               </div>
@@ -270,7 +268,7 @@ const Index = () => {
                     variant="outline"
                     className="text-lg px-8 py-6 transition-all hover:scale-105 border-2 hover:border-conexa-primary hover:text-conexa-primary"
                   >
-                    {t('index.explore_modules')}
+                    Explore All Modules
                   </Button>
                 </Link>
               </div>
@@ -283,7 +281,7 @@ const Index = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="font-poppins font-semibold text-4xl text-gray-900 text-center mb-12">
-                {t('index.testimonials_title')}
+                What Residents Are Saying
               </h2>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Testimonial 1 */}
@@ -349,7 +347,7 @@ const Index = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <h2 className="font-poppins font-semibold text-4xl text-gray-900 text-center mb-12">
-                {t('index.faq_title')}
+                Frequently Asked Questions
               </h2>
               <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="item-1">
@@ -420,21 +418,21 @@ const Index = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="font-poppins font-semibold text-4xl text-white mb-6">
-                {t('index.ready_title')}
+                Ready to Transform Your Building?
               </h2>
               <p className="font-inter text-xl text-white/90 max-w-3xl mx-auto mb-6">
-                {t('index.ready_description')}
+                Start using Conexa today and experience the benefits of streamlined communication, boosted community engagement, and simplified building management.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button className="bg-white text-conexa-primary hover:bg-gray-100 text-lg px-8 py-6 transition-all hover:scale-105 font-semibold">
-                  {t('index.start_free')}
+                  Start Free Today
                 </Button>
                 <Link to="/pricing">
                   <Button
                     variant="outline"
                     className="text-lg px-8 py-6 transition-all hover:scale-105 border-2 border-white bg-transparent text-white hover:bg-white hover:text-conexa-primary font-semibold"
                   >
-                    {t('index.view_pricing')}
+                    View All Pricing
                   </Button>
                 </Link>
               </div>
@@ -442,10 +440,10 @@ const Index = () => {
               {/* Badževi ispod CTA gumba */}
               <div className="flex justify-center space-x-4 mt-6">
                 <span className="bg-white text-conexa-primary font-medium px-4 py-2 rounded-full">
-                  {t('index.iso_badge')}
+                  ISO 27001 Certified
                 </span>
                 <span className="bg-white text-conexa-primary font-medium px-4 py-2 rounded-full">
-                  {t('index.gdpr_badge')}
+                  GDPR Compliant
                 </span>
               </div>
             </div>
