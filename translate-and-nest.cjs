@@ -5,47 +5,69 @@ const glob = require('glob');
 const axios = require('axios');
 require('dotenv').config(); // Učitava varijable iz .env datoteke
 
-// --- Konfiguracijske varijable ---
-// Ovdje ćeš unijeti svoj Google Cloud Translation API ključ
-const googleTranslationApiKey = process.env.GOOGLE_TRANSLATION_API_KEY; 
-
+// --- Konfiguracija ---
+const googleTranslationApiKey = process.env.GOOGLE_TRANSLATION_API_KEY;
 const srcDir = path.resolve(__dirname, 'src');
 const localesDir = path.resolve(__dirname, 'public/locales');
 const baseLang = 'en';
-// Google Translation API koristi BCP-47 kodove jezika.
-// Provjeri listu podržanih kodova ako imaš problema:
-// https://cloud.google.com/translate/docs/languages
-const targetLangs = ['hr', 'de', 'es', 'fr', 'pt', 'nl', 'ru', 'ja', 'ar', 'bn']; 
-const delayBetweenRequests = 100; // Manja pauza (100ms) je dovoljna za Google Translation API
+const targetLangs = ['hr', 'de', 'es', 'fr', 'pt', 'nl', 'ru', 'ja', 'ar', 'bn'];
+const delayBetweenRequests = 100;
 
-// Provjera je li Google Translation API ključ postavljen
+// --- Provjera API ključa ---
 if (!googleTranslationApiKey) {
-    console.error("Greška: GOOGLE_TRANSLATION_API_KEY nije postavljen u .env datoteci.");
-    console.error("Molimo dodajte GOOGLE_TRANSLATION_API_KEY='vaš_ključ_ovdje' u vašu .env datoteku.");
-    process.exit(1); // Prekida izvršavanje skripte
+    console.error("❌ GOOGLE_TRANSLATION_API_KEY nije postavljen u .env.");
+    process.exit(1);
 }
 
-// --- Funkcije za ekstrakciju i generiranje ključeva (nepromijenjene) ---
+// --- Ekstrakcija stringova ---
 function extractStringsFromFile(content) {
-    const regex = /(['"`])((?:[A-Za-z0-9][^"'`\n\r{<>]+?))\1/g;
     const matches = [];
+    const regex = /(['"`])((?:[A-Za-z0-9][^"'`\n\r{<>]+?))\1/g;
+
+    const classAttrRegex = /(class(Name)?\s*=\s*["'`])([^"'`]+)(["'`])/gi;
+    const classWords = new Set();
+
+    // Pronađi sve className i class stringove
+    let classMatch;
+    while ((classMatch = classAttrRegex.exec(content)) !== null) {
+        const classValue = classMatch[3].trim();
+        const words = classValue.split(/\s+/);
+        words.forEach(word => {
+            if (/^[a-z0-9-_:/.%]+$/.test(word)) {
+                classWords.add(word);
+            }
+        });
+    }
+
     let match;
     while ((match = regex.exec(content)) !== null) {
         const str = match[2].trim();
-        if (
-            str.length > 3 &&
-            !str.startsWith('http') &&
-            !str.includes('{') &&
-            !str.includes('<') &&
-            isNaN(str) &&
-            !/^([a-z0-9_]+)$/.test(str)
-        ) {
-            matches.push(str);
-        }
+
+        // ❌ Filtar 1: prekratko ili brojka
+        if (str.length <= 3 || !isNaN(str)) continue;
+
+        // ❌ Filtar 2: URL ili path (npr. 'https://...', './some/file', 'react-dom/client')
+        if (str.match(/^\.?\.?\//) || str.includes('node_modules') || str.includes('/') || str.includes('\\')) continue;
+
+        // ❌ Filtar 3: čisti naziv paketa (react, react-dom, lucide-react, itd.)
+        if (str.match(/^[a-z0-9_-]+\/?[a-z0-9_-]*$/i)) continue;
+
+        // ❌ Filtar 4: niz CSS/Tailwind klasa
+        const words = str.split(/\s+/);
+        const looksLikeCss = words.length > 1 && words.every(w => /^[a-z0-9-_:/.%]+$/.test(w));
+        if (looksLikeCss) continue;
+
+        // ❌ Filtar 5: sve riječi su iz class atributa
+        if (words.every(word => classWords.has(word))) continue;
+
+        // ✅ Inače: korisnički tekst
+        matches.push(str);
     }
+
     return matches;
 }
 
+// --- Generiranje ključeva ---
 function generateKey(str, prefix = 'index') {
     return `${prefix}.${str
         .toLowerCase()
@@ -75,43 +97,44 @@ function unflattenObject(data) {
     return result;
 }
 
-// --- Izmijenjena funkcija za prevođenje pomoću Google Cloud Translation API-ja ---
 async function translateText(text, targetLang) {
-    const googleTranslateUrl = `https://translation.googleapis.com/language/translate/v2?key=${googleTranslationApiKey}`;
-    
+    const url = `https://translation.googleapis.com/language/translate/v2?key=${googleTranslationApiKey}`;
     try {
-        const response = await axios.post(googleTranslateUrl, {
-            q: text,             // Tekst za prevođenje
-            target: targetLang,  // Ciljani jezik
-            format: 'text',      // Format ulaznog teksta
-            source: baseLang     // Eksplicitno navedi izvorni jezik (npr. 'en')
+        const response = await axios.post(url, {
+            q: text,
+            target: targetLang,
+            format: 'text',
+            source: baseLang
         });
-
-        // Google Translate vraća rezultat unutar response.data.data.translations[0].translatedText
         return response.data.data.translations[0].translatedText.trim();
-
     } catch (error) {
-        // Detaljnije logiranje grešaka za Google Translate API
         if (error.response) {
-            console.warn(`⚠️ Greška Google Translate API za "${text}" na ${targetLang} (Status: ${error.response.status}): ${error.response.data.error.message}`);
-            // Google Translate obično vraća grešku 400 (Bad Request) ili 403 (Forbidden) za probleme s API ključem ili kvotama
-            // 429 je manje vjerojatan ovdje, ali ako se pojavi, to bi bio problem s kvotom
-        } else if (error.request) {
-            console.warn(`⚠️ Nema odgovora od Google Translate servera za "${text}":`, error.request);
+            console.warn(`⚠️ API Greška (${error.response.status}) "${text}" → ${targetLang}:`, error.response.data.error.message);
         } else {
-            console.warn(`⚠️ Greška pri postavljanju zahtjeva za Google Translate "${text}":`, error.message);
+            console.warn(`⚠️ Zahtjev nije uspio:`, error.message);
         }
-        // U slučaju greške, baci je dalje kako bi se uhvatila u glavnoj petlji
-        throw new Error(`Nije uspjelo prevođenje "${text}" na ${targetLang} pomoću Google Translate.`);
+        throw new Error(`Neuspješno prevođenje: ${text} → ${targetLang}`);
     }
 }
 
-// --- Glavna izvršna logika ---
+// --- Glavna logika ---
 (async () => {
-    console.log('Početak prevođenja...');
-    const files = glob.sync(`${srcDir}/**/*.{tsx,jsx,html}`);
-    const allStrings = new Set();
+    console.log('🚀 Pokrećem skriptu za prevođenje...');
 
+    if (!fs.existsSync(srcDir)) {
+        console.error(`❌ Folder src ne postoji: ${srcDir}`);
+        return;
+    }
+
+    const files = glob.sync(`${srcDir}/**/*.{tsx,jsx,html}`);
+    console.log(`📁 Pronađeno ${files.length} datoteka za skeniranje.`);
+
+    if (files.length === 0) {
+        console.log('❌ Nema pronađenih .tsx/.jsx/.html fajlova.');
+        return;
+    }
+
+    const allStrings = new Set();
     for (const file of files) {
         const content = fs.readFileSync(file, 'utf-8');
         extractStringsFromFile(content).forEach((s) => allStrings.add(s));
@@ -132,29 +155,26 @@ async function translateText(text, targetLang) {
     const nestedEn = unflattenObject(enJson);
     fs.mkdirSync(path.dirname(enPath), { recursive: true });
     fs.writeFileSync(enPath, JSON.stringify(nestedEn, null, 2), 'utf-8');
-    console.log(`✅ English base updated (${Object.keys(newKeys).length} new strings)`);
+    console.log(`✅ Ažuriran engleski prijevod (${Object.keys(newKeys).length} novih stringova)`);
 
-    // Prevedi nove ključeve na ciljane jezike
     for (const lang of targetLangs) {
-        console.log(`\n▶️ Pokrećem prevođenje za jezik: ${lang.toUpperCase()}`);
+        console.log(`🌍 Prevođenje za: ${lang.toUpperCase()}`);
         const existing = loadExistingTranslations(lang);
         const updated = { ...existing };
-        let translationsCount = 0;
+        let count = 0;
 
         for (const key in newKeys) {
-            // Prevedi samo ako prijevod već ne postoji u postojećim prijevodima za taj jezik
             if (!updated[key]) {
                 try {
-                    const originalText = newKeys[key];
-                    const translated = await translateText(originalText, lang);
+                    const original = newKeys[key];
+                    const translated = await translateText(original, lang);
                     updated[key] = translated;
-                    translationsCount++;
-                    console.log(`📝 ${lang}: ${key} ("${originalText}") → "${translated}"`);
-                    // Mala pauza između zahtjeva da se izbjegnu potencijalni problemi (iako rjeđi s Google Translate)
-                    await new Promise((r) => setTimeout(r, delayBetweenRequests)); 
+                    count++;
+                    console.log(`📝 ${lang}: ${key} = "${translated}"`);
+                    await new Promise((r) => setTimeout(r, delayBetweenRequests));
                 } catch (e) {
-                    console.warn(`⚠️ Nije uspjelo prevođenje "${key}" na ${lang}. Postavljen fallback na engleski:`, e.message);
-                    updated[key] = newKeys[key]; // Fallback na engleski tekst
+                    console.warn(`⚠️ Greška u prijevodu (${lang}) za ključ "${key}":`, e.message);
+                    updated[key] = newKeys[key]; // fallback
                 }
             }
         }
@@ -163,7 +183,7 @@ async function translateText(text, targetLang) {
         const nested = unflattenObject(updated);
         fs.mkdirSync(path.dirname(filePath), { recursive: true });
         fs.writeFileSync(filePath, JSON.stringify(nested, null, 2), 'utf-8');
-        console.log(`🌍 Spremljeno: ${filePath} (${translationsCount} novih prijevoda)`);
+        console.log(`✅ Spremljeno: ${filePath} (${count} novih prijevoda)`);
     }
 
     console.log('\n🎉 Svi prijevodi su završeni.');
