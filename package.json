@@ -42,23 +42,16 @@
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.4",
     "@tanstack/react-query": "^5.56.2",
-<<<<<<< HEAD
     "axios": "^1.9.0",
-=======
-    "axios": "^1.x",
->>>>>>> 1babca724a922747d253dd7675ca0a5944b98c4c
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
     "date-fns": "^3.6.0",
     "dotenv": "^16.4.1",
     "embla-carousel-react": "^8.3.0",
-<<<<<<< HEAD
     "glob": "^11.0.2",
     "i18next": "^25.2.1",
     "i18next-browser-languagedetector": "^8.1.0",
-=======
->>>>>>> a6df996bd26c58b18e1b9d9dc6c1dd5ae6959700
     "input-otp": "^1.2.4",
     "lucide-react": "^0.462.0",
     "next-themes": "^0.3.0",
