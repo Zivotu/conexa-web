@@ -42,7 +42,11 @@
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.4",
     "@tanstack/react-query": "^5.56.2",
+<<<<<<< HEAD
     "axios": "^1.9.0",
+=======
+    "axios": "^1.x",
+>>>>>>> 1babca724a922747d253dd7675ca0a5944b98c4c
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
