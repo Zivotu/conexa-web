@@ -2,6 +2,7 @@
  * Translate English locale files to German, Croatian and Spanish using the
  * Google Cloud Translation API. Set GOOGLE_API_KEY in a .env file and then run
  * `node translate.js`.
+ * Locale JSON files are read from and written to `src/locales`.
  */
 import fs from 'fs/promises';
 import { config } from 'dotenv';
