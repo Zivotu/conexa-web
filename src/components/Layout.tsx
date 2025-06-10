@@ -1,18 +1,15 @@
 import Navigation from './Navigation';
 import Footer from './Footer';
 import { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const { i18n } = useTranslation();
-
   useEffect(() => {
-    document.documentElement.lang = i18n.language;
-  }, [i18n.language]);
+    document.documentElement.lang = 'en';
+  }, []);
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
