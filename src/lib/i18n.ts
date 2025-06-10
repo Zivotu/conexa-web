@@ -11,7 +11,9 @@ i18n
     fallbackLng: 'en',
     interpolation: { escapeValue: false },
     backend: {
-      loadPath: '/locales/{{lng}}/translation.json',
+      // Use a relative path so translations load correctly even when the app is
+      // served from a subfolder
+      loadPath: 'locales/{{lng}}/translation.json',
     },
   });
 
