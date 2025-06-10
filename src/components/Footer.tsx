@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import { Shield, Check } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <footer className="bg-white border-t border-gray-100">
       <div className="container mx-auto px-4 py-12">
@@ -15,14 +17,14 @@ const Footer = () => {
               <span className="font-poppins font-semibold text-xl text-gray-900">Conexa</span>
             </Link>
             <p className="text-gray-600 font-inter mb-6 max-w-md">
-              Transform everyday life in apartment buildings and their surrounding neighbourhoods. Local life, simplified.
+              {t('footer.description')}
             </p>
             
             {/* GDPR Compliance Badge */}
             <div className="flex items-center space-x-2 mb-4">
               <div className="flex items-center bg-green-50 border border-green-200 rounded-lg px-3 py-2">
                 <Shield className="w-4 h-4 text-green-600 mr-2" />
-                <span className="text-sm font-inter text-green-700">GDPR Compliance</span>
+                <span className="text-sm font-inter text-green-700">{t('footer.gdpr_compliance')}</span>
                 <Check className="w-4 h-4 text-green-600 ml-1" />
               </div>
             </div>
@@ -53,23 +55,23 @@ const Footer = () => {
 
           {/* Product Links */}
           <div>
-            <h3 className="font-poppins font-semibold text-gray-900 mb-4">Product</h3>
+            <h3 className="font-poppins font-semibold text-gray-900 mb-4">{t('footer.product')}</h3>
             <ul className="space-y-3">
-              <li><Link to="/modules" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">Features</Link></li>
-              <li><Link to="/how-it-works" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">How It Works</Link></li>
-              <li><Link to="/benefits" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">Benefits</Link></li>
-              <li><Link to="/pricing" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">Pricing</Link></li>
+              <li><Link to="/modules" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">{t('footer.features')}</Link></li>
+              <li><Link to="/how-it-works" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">{t('footer.how_it_works')}</Link></li>
+              <li><Link to="/benefits" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">{t('footer.benefits')}</Link></li>
+              <li><Link to="/pricing" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">{t('footer.pricing')}</Link></li>
             </ul>
           </div>
 
           {/* Company Links */}
           <div>
-            <h3 className="font-poppins font-semibold text-gray-900 mb-4">Company</h3>
+            <h3 className="font-poppins font-semibold text-gray-900 mb-4">{t('footer.company')}</h3>
             <ul className="space-y-3">
-              <li><Link to="/about" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">About</Link></li>
-              <li><Link to="/blog" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">Blog</Link></li>
-              <li><Link to="/contact" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">Contact</Link></li>
-              <li><Link to="/faq" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">FAQ</Link></li>
+              <li><Link to="/about" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">{t('footer.about')}</Link></li>
+              <li><Link to="/blog" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">{t('footer.blog')}</Link></li>
+              <li><Link to="/contact" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">{t('footer.contact')}</Link></li>
+              <li><Link to="/faq" className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter">{t('footer.faq')}</Link></li>
             </ul>
           </div>
         </div>
@@ -82,30 +84,30 @@ const Footer = () => {
                 to="/privacy-policy"
                 className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter text-sm"
               >
-                Privacy Policy
+                {t('footer.privacy_policy')}
               </Link>
               <Link
                 to="/terms-of-service"
                 className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter text-sm"
               >
-                Terms of Service
+                {t('footer.terms_of_service')}
               </Link>
               <Link
                 to="/gdpr-compliance"
                 className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter text-sm"
               >
-                GDPR Compliance
+                {t('footer.gdpr_compliance')}
               </Link>
               <Link
                 to="/cookie-policy"
                 className="text-gray-600 hover:text-[#FF7847] transition-colors font-inter text-sm"
               >
-                Cookie Policy
+                {t('footer.cookie_policy')}
               </Link>
             </div>
             
             <p className="text-gray-600 font-inter text-sm text-center md:text-right">
-              © 2024 Conexa. All rights reserved. | Local life, simplified.
+              {t('footer.copyright')}
             </p>
           </div>
         </div>
