@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 import { Link } from 'react-router-dom';
 import { Check } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 /**
  * -----------------------------------------------------------------------------
@@ -39,29 +40,32 @@ const allModules: string[] = [
   'Conference Rooms (Coming 2026)'
 ];
 
-const faq: { q: string; a: string }[] = [
-  { q: 'Is the €34 charged per resident?', a: 'No. One flat fee per building, unlimited users.' },
-  { q: 'Are taxes included?', a: 'Prices shown are net. VAT/GST is added by App Store / Google Play based on your country.' },
-  { q: 'Any hidden costs?', a: 'Zero. No setup, storage or support fees.' },
-  { q: 'How do we pay?', a: 'Monthly auto-renew in App Store / Google Play. Cancel any time – billing stops immediately.' },
-  { q: 'What happens after the 7-day trial?', a: 'Your virtual building goes inactive until you purchase a membership. No automatic charge.' },
-  { q: 'Do future modules cost extra?', a: 'No. All current & future modules are included in Building Membership.' },
-  { q: 'User limits?', a: 'None today. A soft cap (500–1000) may be introduced later for performance reasons only.' },
-  { q: 'Can residents disable modules?', a: 'Yes. Building admins can toggle modules on/off at any time.' },
-  { q: 'Data & GDPR?', a: 'Hosted on Google Cloud (EU data centres). No personal data visible outside the building.' },
-  { q: 'Support?', a: 'In-app "Contact Support", live chat on website, or email info@conexa.life.' }
-];
+let faq: { q: string; a: string }[] = [];
 
-const Pricing = () => (
+const Pricing = () => {
+  const { t } = useTranslation();
+  faq = [
+    { q: t('pricing_page.faq_q1'), a: t('pricing_page.faq_a1') },
+    { q: t('pricing_page.faq_q2'), a: t('pricing_page.faq_a2') },
+    { q: t('pricing_page.faq_q3'), a: t('pricing_page.faq_a3') },
+    { q: t('pricing_page.faq_q4'), a: t('pricing_page.faq_a4') },
+    { q: t('pricing_page.faq_q5'), a: t('pricing_page.faq_a5') },
+    { q: t('pricing_page.faq_q6'), a: t('pricing_page.faq_a6') },
+    { q: t('pricing_page.faq_q7'), a: t('pricing_page.faq_a7') },
+    { q: t('pricing_page.faq_q8'), a: t('pricing_page.faq_a8') },
+    { q: t('pricing_page.faq_q9'), a: t('pricing_page.faq_a9') },
+    { q: t('pricing_page.faq_q10'), a: t('pricing_page.faq_a10') },
+  ];
+  return (
   <Layout>
     {/* ─────────────────────────── Hero ─────────────────────────── */}
     <section className="bg-gradient-to-br from-conexa-light-grey to-white py-14 text-center">
       <div className="container mx-auto px-4 max-w-4xl">
         <h1 className="font-poppins font-semibold text-4xl lg:text-5xl text-gray-900 mb-4">
-          Simple, Transparent Pricing
+          {t('pricing_page.title')}
         </h1>
         <p className="font-inter text-lg text-gray-600 mb-8">
-          One flat monthly fee unlocks <strong>every module</strong> for every resident in your building.
+          {t('pricing_page.subtitle')}
         </p>
         <img
           src="/assets/pricing_1.png"
@@ -81,15 +85,17 @@ const Pricing = () => (
           <Card className="p-6 border border-gray-200">
             <CardContent className="p-0">
               <div className="text-center mb-6">
-                <h3 className="font-poppins font-semibold text-2xl text-gray-900 mb-1">Free Community</h3>
+                <h3 className="font-poppins font-semibold text-2xl text-gray-900 mb-1">
+                  {t('pricing_page.free_plan')}
+                </h3>
                 <div className="mb-3">
                   <span className="text-3xl font-bold text-gray-900">€0</span>
-                  <span className="ml-2 text-gray-600">/ forever</span>
+                  <span className="ml-2 text-gray-600">{t('pricing_page.free_forever')}</span>
                 </div>
               </div>
               <ul className="space-y-1 mb-6 text-sm">
-                <li className="flex items-center"><Check className="w-4 h-4 text-conexa-primary mr-2" />Home Repairs</li>
-                <li className="flex items-center"><Check className="w-4 h-4 text-conexa-primary mr-2" />Local Posts</li>
+                <li className="flex items-center"><Check className="w-4 h-4 text-conexa-primary mr-2" />{t('index.home_repairs')}</li>
+                <li className="flex items-center"><Check className="w-4 h-4 text-conexa-primary mr-2" />{t('index.local_posts')}</li>
               </ul>
               <a
                 href="https://play.google.com/store/apps/details?id=dreamteamstudio.online.conexa&hl=en-US&ah=gz9G-WCHhz5UVkJh502cYJIcG4E"
@@ -97,7 +103,7 @@ const Pricing = () => (
                 rel="noopener noreferrer"
               >
                 <Button className="w-full py-4 text-lg bg-gray-100 text-gray-900 hover:bg-gray-200 transition-all hover:scale-105">
-                  Get Started Free
+                  {t('pricing_page.get_started_free')}
                 </Button>
               </a>
             </CardContent>
@@ -106,18 +112,22 @@ const Pricing = () => (
           {/* Building Membership Plan */}
           <Card className="relative p-6 border-2 border-conexa-primary shadow-lg">
             <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-              <span className="bg-conexa-primary text-white px-3 py-1 rounded-full text-sm font-medium">Most Popular</span>
+              <span className="bg-conexa-primary text-white px-3 py-1 rounded-full text-sm font-medium">
+                {t('pricing_page.most_popular')}
+              </span>
             </div>
             <CardContent className="p-0">
               <div className="text-center mb-6">
-                <h3 className="font-poppins font-semibold text-2xl text-gray-900 mb-1">Building Membership</h3>
+                <h3 className="font-poppins font-semibold text-2xl text-gray-900 mb-1">
+                  {t('pricing_page.building_membership')}
+                </h3>
                 <div className="mb-3 flex flex-col items-center">
                   <div>
                     <span className="text-3xl font-bold text-gray-900">€34</span>
-                    <span className="ml-2 text-gray-600">/ month</span>
+                    <span className="ml-2 text-gray-600">{t('pricing_page.per_month')}</span>
                   </div>
                   <span className="mt-1 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-conexa-primary/10 text-conexa-primary">
-                    per building · unlimited residents
+                    {t('index.per_building_unlimited_residents')}
                   </span>
                 </div>
               </div>
@@ -133,7 +143,7 @@ const Pricing = () => (
               </ul>
 
               <p className="mb-4 text-sm text-gray-600 text-center">
-                No hidden fees · VAT added at checkout · Cancel anytime
+                {t('pricing_page.note')}
               </p>
 
               <a
@@ -142,7 +152,7 @@ const Pricing = () => (
                 rel="noopener noreferrer"
               >
                 <Button className="w-full py-4 text-lg bg-conexa-primary text-white hover:bg-blue-700 transition-all hover:scale-105" aria-label="Activate Building Membership – €34 flat fee">
-                  Activate for Your Building
+                  {t('pricing_page.activate_building')}
                 </Button>
               </a>
             </CardContent>
@@ -154,7 +164,9 @@ const Pricing = () => (
     {/* ───────────────────────── FAQ ───────────────────────── */}
     <section className="py-20 bg-conexa-light-grey">
       <div className="container mx-auto px-4 max-w-4xl">
-        <h2 className="font-poppins font-semibold text-3xl text-gray-900 text-center mb-10">Frequently Asked Questions</h2>
+        <h2 className="font-poppins font-semibold text-3xl text-gray-900 text-center mb-10">
+          {t('pricing_page.faq_title')}
+        </h2>
         <Accordion type="multiple" className="w-full">
           {faq.map(({ q, a }) => (
             <AccordionItem key={q} value={q} className="border-b border-gray-200">
@@ -166,6 +178,7 @@ const Pricing = () => (
       </div>
     </section>
   </Layout>
-);
+  );
+};
 
 export default Pricing;
