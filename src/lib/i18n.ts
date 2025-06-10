@@ -11,9 +11,10 @@ i18n
     fallbackLng: 'en',
     interpolation: { escapeValue: false },
     backend: {
-      // Use a relative path so translations load correctly even when the app is
-      // served from a subfolder
-      loadPath: 'locales/{{lng}}/translation.json',
+      // Use BASE_URL to resolve the translations relative to the Vite base
+      // path so that they load correctly regardless of the deployment
+      // subfolder
+      loadPath: `${import.meta.env.BASE_URL}locales/{{lng}}/translation.json`,
     },
   });
 
